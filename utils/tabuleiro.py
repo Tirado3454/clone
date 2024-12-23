@@ -1,45 +1,48 @@
-import streamlit as st
 import chess
 import chess.svg
+from PIL import Image
+import cairosvg
+import streamlit as st
+import os
+
+def save_board_as_image(fen, filename="tabuleiro.png"):
+    # Criar o tabuleiro a partir da configuração FEN
+    board = chess.Board(fen)
+    
+    # Gerar o SVG do tabuleiro
+    svg_data = chess.svg.board(board)
+
+    # Converter SVG para PNG usando cairosvg
+    try:
+        cairosvg.svg2png(bytestring=svg_data, write_to=filename)
+        return filename
+    except Exception as e:
+        st.error(f"Erro ao converter SVG para PNG: {e}")
+        return None
 
 def board_editor_function():
-    # Inicialização do tabuleiro no estado global
-    if "current_board" not in st.session_state:
-        st.session_state.current_board = chess.Board()
-    if "board_data" not in st.session_state:
-        st.session_state.board_data = st.session_state.current_board.fen()
+    st.title("Editor de Tabuleiro de Xadrez")
 
-    # Função para renderizar o tabuleiro com estilo customizado
-    def render_tabuleiro_customizado(board):
-        return chess.svg.board(
-            board=board, 
-            size=320,  # Tamanho do tabuleiro
-            style=""" 
-                .square.light { fill: #ffffff; }  /* Casas claras em branco */
-                .square.dark { fill: #8FBC8F; }  /* Casas escuras em verde */
-            """
-        )
+    # Posição inicial em FEN
+    fen = st.text_input("Insira a configuração do tabuleiro em FEN:", value=chess.STARTING_BOARD_FEN)
 
-    # Configuração do tabuleiro com FEN
-    st.subheader("Configuração do Tabuleiro")
-    fen_input = st.text_input(
-        "Insira a notação FEN para configurar o tabuleiro:", 
-        value=st.session_state.current_board.fen(),
-        help="Insira uma configuração FEN válida para alterar o tabuleiro."
-    )
+    # Botão para gerar e exibir o tabuleiro
+    if st.button("Gerar Tabuleiro"):
+        filename = save_board_as_image(fen)
+        if filename:
+            st.success("Tabuleiro gerado com sucesso!")
+            # Exibir a imagem no Streamlit
+            st.image(filename, caption="Tabuleiro Configurado")
 
-    if st.button("Atualizar Tabuleiro com FEN"):
-        try:
-            st.session_state.current_board.set_fen(fen_input)
-            st.session_state.board_data = st.session_state.current_board.fen()
-            st.success("Tabuleiro atualizado com sucesso!")
-        except ValueError:
-            st.error("Notação FEN inválida. Por favor, insira uma notação correta.")
+            # Botão para baixar o tabuleiro como imagem
+            with open(filename, "rb") as file:
+                st.download_button(
+                    label="Baixar Tabuleiro como PNG",
+                    data=file,
+                    file_name="tabuleiro.png",
+                    mime="image/png"
+                )
 
-    # Visualizar tabuleiro configurado
-    st.subheader("Tabuleiro Atual")
-    st.image(render_tabuleiro_customizado(st.session_state.current_board), use_container_width=True)
+            # Remover o arquivo gerado localmente (opcional)
+            os.remove(filename)
 
-    # Mostrar a FEN atual
-    st.subheader("Notação FEN Atual")
-    st.code(st.session_state.board_data, language="text")
