@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd  # Certifique-se de que pandas está importado
+import pandas as pd  # Certifique-se de importar pandas
 from utils.maintexto import mhd_function
 from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
@@ -8,72 +8,28 @@ from utils.apresentacao import apresentacao_function
 from utils.contextualizacao import contextualizacao_page_function
 
 # Inicializar o estado do programa
-if "mhd_data" not in st.session_state:
+if "mhd_data" not in st.session_state or not isinstance(st.session_state.mhd_data, pd.DataFrame):
     st.session_state.mhd_data = pd.DataFrame(columns=["Etapa", "Descrição", "FEN"])
 
-# Configuração inicial
-st.set_page_config(page_title="Modelo Hipotético-Dedutivo no Xadrez", layout="wide")
+# Certificar-se de que mhd_data é tratado como DataFrame antes de usar
+if not st.session_state.mhd_data.empty:
+    # Código relacionado ao DataFrame `mhd_data`
+    st.write("Tabela de dados existente:")
+    st.dataframe(st.session_state.mhd_data)
 
-# Definição de abas principais
-menu_itens = ["Apresentação", "Contextualização"]
-funcionalidades = ["Modelo Hipotético-Dedutivo", "Editor de Tabuleiro", "Banco de Frases", "Exportar Dados"]
+# Restante do programa
+menu = st.sidebar.radio("Escolha uma funcionalidade:", ["Apresentação", "Contextualização", "MHD", "Editor de Tabuleiro", "Banco de Frases", "Exportar Dados"])
 
-# Sessões para controle de abas
-if "active_text_tab" not in st.session_state:
-    st.session_state["active_text_tab"] = menu_itens[0]
-
-if "active_func_tab" not in st.session_state:
-    st.session_state["active_func_tab"] = funcionalidades[0]
-
-# Barra lateral
-st.sidebar.title("Menu")
-st.sidebar.markdown("### Textos")
-for item in menu_itens:
-    if st.sidebar.button(item, key=f"text_{item}"):
-        st.session_state["active_text_tab"] = item
-        st.session_state["active_func_tab"] = None
-
-st.sidebar.markdown("### Funcionalidades")
-for func in funcionalidades:
-    if st.sidebar.button(func, key=f"func_{func}"):
-        st.session_state["active_func_tab"] = func
-        st.session_state["active_text_tab"] = None
-
-# Apresentação das abas
-if st.session_state["active_text_tab"] == "Apresentação":
+if menu == "Apresentação":
     apresentacao_function()
-
-elif st.session_state["active_text_tab"] == "Contextualização":
+elif menu == "Contextualização":
     contextualizacao_page_function()
-
-elif st.session_state["active_func_tab"] == "Modelo Hipotético-Dedutivo":
+elif menu == "MHD":
     mhd_function()
-
-elif st.session_state["active_func_tab"] == "Editor de Tabuleiro":
+elif menu == "Editor de Tabuleiro":
     board_editor_function()
-
-elif st.session_state["active_func_tab"] == "Banco de Frases":
+elif menu == "Banco de Frases":
     phrase_bank_function()
-
-elif st.session_state["active_func_tab"] == "Exportar Dados":
-    st.markdown("### Exportar Dados")
-    st.write("Baixe os dados gerados durante a interação com o programa.")
-
-    if "mhd_data" in st.session_state and not st.session_state.mhd_data.empty:
-        col_download1, col_download2 = st.columns(2)
-        with col_download1:
-            st.download_button(
-                label="Baixar PDF",
-                data=generate_pdf(st.session_state.mhd_data),
-                file_name="mhd_xadrez.pdf",
-                mime="application/pdf"
-            )
-        with col_download2:
-            st.download_button(
-                label="Baixar CSV",
-                data=generate_csv(st.session_state.mhd_data),
-                file_name="mhd_xadrez.csv",
-                mime="text/csv"
-            )
-    else:
-        st.info("Nenhum dado disponível para exportação.")
+elif menu == "Exportar Dados":
+    generate_pdf()
+    generate_csv()
