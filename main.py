@@ -4,7 +4,7 @@ from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
 from utils.export import generate_pdf, generate_csv
 from utils.apresentacao import apresentacao_function  # Import da página de apresentação
-from utils.contextualizacao import contextualizacao_function  # Import da página de contextualização
+from utils.contextualizacao import contextualizacao_page_function # Import da página de contextualização
 
 # Configuração inicial da página
 st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
