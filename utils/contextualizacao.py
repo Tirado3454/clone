@@ -1,8 +1,8 @@
 import streamlit as st
 
-def contextualizacao_function():
+def contextualizacao_page_function():
     st.title("Contextualização")
-
+    
     st.markdown("""
     ## A Importância do Método Hipotético-Dedutivo (MHD) no Contexto Atual
     
