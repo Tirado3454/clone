@@ -3,92 +3,44 @@ from utils.maintexto import mhd_function
 from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
 from utils.export import generate_pdf, generate_csv
-from utils.apresentacao import apresentacao_function  # Import da página de apresentação
-from utils.contextualizacao import contextualizacao_page_function # Import da página de contextualização
+from utils.apresentacao import apresentacao_function  # Página de Apresentação
+from utils.contextualizacao import contextualizacao_page_function  # Página de Contextualização
 
-# Configuração inicial da página
-st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
+# Configuração inicial
+st.set_page_config(page_title="MHD no Xadrez", layout="centered")
 
-# Inicializar estados globais, se necessário
-if "mhd_data" not in st.session_state:
-    st.session_state["mhd_data"] = {}
-if "board_data" not in st.session_state:
-    st.session_state["board_data"] = ""
-if "phrases_selected" not in st.session_state:
-    st.session_state["phrases_selected"] = []
+# Título Principal
+st.title("MENU PRINCIPAL")
 
-# Definição do menu de navegação
-menu_option = st.sidebar.radio(
-    "Escolha uma funcionalidade:",
-    [
-        "Apresentação",  # Nova opção no menu
-        "Contextualização",  # Nova opção no menu
-        "Modelo Hipotético-Dedutivo",
-        "Editor de Tabuleiro",
-        "Banco de Frases",
-        "Exportar Dados"
-    ]
-)
+# Seção de Textos Estáticos
+st.header("Informações e Introdução")
+opcoes_textos = ["Apresentação", "Contextualização"]
+texto_escolhido = st.radio("Escolha um tópico para visualizar:", opcoes_textos)
 
-# Lógica para cada opção do menu
-if menu_option == "Apresentação":
+if texto_escolhido == "Apresentação":
     apresentacao_function()
-elif menu_option == "Contextualização":
+elif texto_escolhido == "Contextualização":
     contextualizacao_page_function()
-elif menu_option == "Modelo Hipotético-Dedutivo":
+
+# Separação visual
+st.markdown("---")
+
+# Seção de Funcionalidades Interativas
+st.header("Funcionalidades Interativas")
+opcoes_funcionalidades = [
+    "Modelo Hipotético-Dedutivo",
+    "Editor de Tabuleiro",
+    "Banco de Frases",
+    "Exportar Dados",
+]
+funcionalidade_escolhida = st.radio("Selecione uma funcionalidade:", opcoes_funcionalidades)
+
+if funcionalidade_escolhida == "Modelo Hipotético-Dedutivo":
     mhd_function()
-elif menu_option == "Editor de Tabuleiro":
+elif funcionalidade_escolhida == "Editor de Tabuleiro":
     board_editor_function()
-elif menu_option == "Banco de Frases":
+elif funcionalidade_escolhida == "Banco de Frases":
     phrase_bank_function()
-elif menu_option == "Exportar Dados":
-    st.title("Exportar Dados Consolidados")
-    
-    # Exibir dados disponíveis
-    st.markdown("### Dados do Modelo Hipotético-Dedutivo")
-    if st.session_state.get("mhd_data"):
-        st.write(st.session_state["mhd_data"])
-    else:
-        st.warning("Nenhum dado do Modelo Hipotético-Dedutivo disponível.")
-
-    st.markdown("### Configuração do Tabuleiro")
-    if st.session_state.get("board_data"):
-        st.write(st.session_state["board_data"])
-    else:
-        st.warning("Nenhuma configuração de tabuleiro disponível.")
-
-    st.markdown("### Frases Selecionadas")
-    if st.session_state.get("phrases_selected"):
-        st.write(st.session_state["phrases_selected"])
-    else:
-        st.warning("Nenhuma frase selecionada.")
-
-    # Escolher formato de exportação
-    export_format = st.radio("Escolha o formato de exportação:", ["PDF", "CSV"])
-
-    # Botão de exportação
-    if st.button("Exportar"):
-        if export_format == "PDF":
-            pdf_data = generate_pdf(
-                st.session_state.get("mhd_data", {}),
-                st.session_state.get("board_data", ""),
-                st.session_state.get("phrases_selected", [])
-            )
-            st.download_button(
-                label="Baixar PDF",
-                data=pdf_data,
-                file_name="dados_consolidados.pdf",
-                mime="application/pdf"
-            )
-        elif export_format == "CSV":
-            csv_data = generate_csv(
-                st.session_state.get("mhd_data", {}),
-                st.session_state.get("board_data", ""),
-                st.session_state.get("phrases_selected", [])
-            )
-            st.download_button(
-                label="Baixar CSV",
-                data=csv_data,
-                file_name="dados_consolidados.csv",
-                mime="text/csv"
-            )
+elif funcionalidade_escolhida == "Exportar Dados":
+    generate_pdf()
+    generate_csv()
