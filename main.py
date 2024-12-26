@@ -34,7 +34,7 @@ menu_option = st.sidebar.radio(
 if menu_option == "Apresentação":
     apresentacao_function()
 elif menu_option == "Contextualização":
-    contextualizacao_function()
+    contextualizacao_page_function()
 elif menu_option == "Modelo Hipotético-Dedutivo":
     mhd_function()
 elif menu_option == "Editor de Tabuleiro":
