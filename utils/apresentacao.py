@@ -1,6 +1,6 @@
 import streamlit as st
 
-def apresentacao():
+def apresentacao_function():
     """
     Função para exibir a página de Apresentação do programa.
     """
