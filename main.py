@@ -7,55 +7,68 @@ from utils.apresentacao import apresentacao_function
 from utils.contextualizacao import contextualizacao_page_function
 
 # Configuração inicial
-st.set_page_config(page_title="MHD no Xadrez", layout="wide")
+st.set_page_config(page_title="Modelo Hipotético-Dedutivo no Xadrez", layout="wide")
 
-# Inicializar estado de navegação
-if "active_tab" not in st.session_state:
-    st.session_state["active_tab"] = "Apresentação"
+# Definição de abas principais
+menu_itens = ["Apresentação", "Contextualização"]
+funcionalidades = ["Modelo Hipotético-Dedutivo", "Editor de Tabuleiro", "Banco de Frases", "Exportar Dados"]
 
-# Função para alterar o estado ativo
-def set_active_tab(tab_name):
-    st.session_state["active_tab"] = tab_name
+# Sessões para controle de abas
+if "active_text_tab" not in st.session_state:
+    st.session_state["active_text_tab"] = menu_itens[0]
 
-# Dividindo o layout em duas colunas
-col1, col2 = st.columns([1, 3])
+if "active_func_tab" not in st.session_state:
+    st.session_state["active_func_tab"] = funcionalidades[0]
 
-# Coluna 1 - Navegação
-with col1:
-    st.markdown("### Textos Explicativos")
-    if st.button("Apresentação", key="btn_apresentacao"):
-        set_active_tab("Apresentação")
-    if st.button("Contextualização", key="btn_contextualizacao"):
-        set_active_tab("Contextualização")
+# Barra lateral
+st.sidebar.title("Menu")
+st.sidebar.markdown("### Textos")
+for item in menu_itens:
+    if st.sidebar.button(item, key=f"text_{item}"):
+        st.session_state["active_text_tab"] = item
+        st.session_state["active_func_tab"] = None
 
-    st.markdown("### Funcionalidades")
-    if st.button("Modelo Hipotético-Dedutivo", key="btn_mhd"):
-        set_active_tab("Modelo Hipotético-Dedutivo")
-    if st.button("Editor de Tabuleiro", key="btn_tabuleiro"):
-        set_active_tab("Editor de Tabuleiro")
-    if st.button("Banco de Frases", key="btn_frases"):
-        set_active_tab("Banco de Frases")
-    if st.button("Exportar Dados", key="btn_exportar"):
-        set_active_tab("Exportar Dados")
+st.sidebar.markdown("### Funcionalidades")
+for func in funcionalidades:
+    if st.sidebar.button(func, key=f"func_{func}"):
+        st.session_state["active_func_tab"] = func
+        st.session_state["active_text_tab"] = None
 
-# Coluna 2 - Conteúdo
-with col2:
-    if st.session_state["active_tab"] == "Apresentação":
-        apresentacao_function()
-    elif st.session_state["active_tab"] == "Contextualização":
-        contextualizacao_page_function()
-    elif st.session_state["active_tab"] == "Modelo Hipotético-Dedutivo":
-        mhd_function()
-    elif st.session_state["active_tab"] == "Editor de Tabuleiro":
-        board_editor_function()
-    elif st.session_state["active_tab"] == "Banco de Frases":
-        phrase_bank_function()
-    elif st.session_state["active_tab"] == "Exportar Dados":
-        st.markdown("### Exportar Dados")
-        st.write("Baixe os dados gerados durante a interação com o programa.")
-        # Adicionar botões de exportação interativos
+# Apresentação das abas
+if st.session_state["active_text_tab"] == "Apresentação":
+    apresentacao_function()
+
+elif st.session_state["active_text_tab"] == "Contextualização":
+    contextualizacao_page_function()
+
+elif st.session_state["active_func_tab"] == "Modelo Hipotético-Dedutivo":
+    mhd_function()
+
+elif st.session_state["active_func_tab"] == "Editor de Tabuleiro":
+    board_editor_function()
+
+elif st.session_state["active_func_tab"] == "Banco de Frases":
+    phrase_bank_function()
+
+elif st.session_state["active_func_tab"] == "Exportar Dados":
+    st.markdown("### Exportar Dados")
+    st.write("Baixe os dados gerados durante a interação com o programa.")
+
+    if "mhd_data" in st.session_state and not st.session_state.mhd_data.empty:
         col_download1, col_download2 = st.columns(2)
         with col_download1:
-            generate_pdf()  # Gera o botão de download para o PDF
+            st.download_button(
+                label="Baixar PDF",
+                data=generate_pdf(st.session_state.mhd_data),
+                file_name="mhd_xadrez.pdf",
+                mime="application/pdf"
+            )
         with col_download2:
-            generate_csv()  # Gera o botão de download para o CSV
+            st.download_button(
+                label="Baixar CSV",
+                data=generate_csv(st.session_state.mhd_data),
+                file_name="mhd_xadrez.csv",
+                mime="text/csv"
+            )
+    else:
+        st.info("Nenhum dado disponível para exportação.")
