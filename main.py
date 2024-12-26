@@ -51,5 +51,11 @@ with col2:
     elif st.session_state["active_tab"] == "Banco de Frases":
         phrase_bank_function()
     elif st.session_state["active_tab"] == "Exportar Dados":
-        generate_pdf()
-        generate_csv()
+        st.markdown("### Exportar Dados")
+        st.write("Baixe os dados gerados durante a interação com o programa.")
+        # Adicionar botões de exportação interativos
+        col_download1, col_download2 = st.columns(2)
+        with col_download1:
+            generate_pdf()  # Gera o botão de download para o PDF
+        with col_download2:
+            generate_csv()  # Gera o botão de download para o CSV
