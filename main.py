@@ -1,35 +1,46 @@
 import streamlit as st
-import pandas as pd  # Certifique-se de importar pandas
 from utils.maintexto import mhd_function
 from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
 from utils.export import generate_pdf, generate_csv
-from utils.apresentacao import apresentacao_function
-from utils.contextualizacao import contextualizacao_page_function
+from utils.apresentacao import apresentacao_function  # Import da página de apresentação
+from utils.contextualizacao import contextualizacao_page_function  # Import da página de contextualização
 
-# Inicializar o estado do programa
-if "mhd_data" not in st.session_state or not isinstance(st.session_state.mhd_data, pd.DataFrame):
-    st.session_state.mhd_data = pd.DataFrame(columns=["Etapa", "Descrição", "FEN"])
+# Configuração inicial da página
+st.set_page_config(page_title="MHD no Xadrez", layout="centered")
 
-# Certificar-se de que mhd_data é tratado como DataFrame antes de usar
-if not st.session_state.mhd_data.empty:
-    # Código relacionado ao DataFrame `mhd_data`
-    st.write("Tabela de dados existente:")
-    st.dataframe(st.session_state.mhd_data)
+# Título principal
+st.title("MENU")
 
-# Restante do programa
-menu = st.sidebar.radio("Escolha uma funcionalidade:", ["Apresentação", "Contextualização", "MHD", "Editor de Tabuleiro", "Banco de Frases", "Exportar Dados"])
+# Seção de introdução
+st.header("Informações")
+opcoes_introducao = ["Apresentação", "Contextualização"]
+introducao = st.selectbox("Escolha uma opção:", opcoes_introducao)
 
-if menu == "Apresentação":
+if introducao == "Apresentação":
     apresentacao_function()
-elif menu == "Contextualização":
+elif introducao == "Contextualização":
     contextualizacao_page_function()
-elif menu == "MHD":
+
+# Divisão visual
+st.markdown("---")
+
+# Seção de funcionalidades
+st.header("Selecione as Funcionalidades")
+opcoes_funcionalidades = [
+    "Modelo Hipotético-Dedutivo",
+    "Editor de Tabuleiro",
+    "Banco de Frases",
+    "Exportar Dados",
+]
+funcionalidade = st.selectbox("Escolha uma funcionalidade:", opcoes_funcionalidades)
+
+if funcionalidade == "Modelo Hipotético-Dedutivo":
     mhd_function()
-elif menu == "Editor de Tabuleiro":
+elif funcionalidade == "Editor de Tabuleiro":
     board_editor_function()
-elif menu == "Banco de Frases":
+elif funcionalidade == "Banco de Frases":
     phrase_bank_function()
-elif menu == "Exportar Dados":
+elif funcionalidade == "Exportar Dados":
     generate_pdf()
     generate_csv()
