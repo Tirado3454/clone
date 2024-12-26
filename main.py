@@ -3,6 +3,8 @@ from utils.maintexto import mhd_function
 from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
 from utils.export import generate_pdf, generate_csv
+from utils.apresentacao import apresentacao_function  # Import da página de apresentação
+from utils.contextualizacao import contextualizacao_function  # Import da página de contextualização
 
 # Configuração inicial da página
 st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
@@ -18,11 +20,22 @@ if "phrases_selected" not in st.session_state:
 # Definição do menu de navegação
 menu_option = st.sidebar.radio(
     "Escolha uma funcionalidade:",
-    ["Modelo Hipotético-Dedutivo", "Editor de Tabuleiro", "Banco de Frases", "Exportar Dados"]
+    [
+        "Apresentação",  # Nova opção no menu
+        "Contextualização",  # Nova opção no menu
+        "Modelo Hipotético-Dedutivo",
+        "Editor de Tabuleiro",
+        "Banco de Frases",
+        "Exportar Dados"
+    ]
 )
 
 # Lógica para cada opção do menu
-if menu_option == "Modelo Hipotético-Dedutivo":
+if menu_option == "Apresentação":
+    apresentacao_function()
+elif menu_option == "Contextualização":
+    contextualizacao_function()
+elif menu_option == "Modelo Hipotético-Dedutivo":
     mhd_function()
 elif menu_option == "Editor de Tabuleiro":
     board_editor_function()
