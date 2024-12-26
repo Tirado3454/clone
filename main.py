@@ -14,26 +14,30 @@ st.title("MENU PRINCIPAL")
 
 # Seção de Textos Estáticos
 st.header("Informações e Introdução")
-opcoes_textos = ["Apresentação", "Contextualização"]
-texto_escolhido = st.radio("Escolha um tópico para visualizar:", opcoes_textos)
+with st.container():
+    st.subheader("Escolha um Tópico:")
+    opcoes_textos = ["Apresentação", "Contextualização"]
+    texto_escolhido = st.radio("", opcoes_textos, key="text_section")
 
 if texto_escolhido == "Apresentação":
     apresentacao_function()
 elif texto_escolhido == "Contextualização":
     contextualizacao_page_function()
 
-# Separação visual
+# Separação visual com linha horizontal
 st.markdown("---")
 
 # Seção de Funcionalidades Interativas
 st.header("Funcionalidades Interativas")
-opcoes_funcionalidades = [
-    "Modelo Hipotético-Dedutivo",
-    "Editor de Tabuleiro",
-    "Banco de Frases",
-    "Exportar Dados",
-]
-funcionalidade_escolhida = st.radio("Selecione uma funcionalidade:", opcoes_funcionalidades)
+with st.container():
+    st.subheader("Selecione uma Ferramenta:")
+    opcoes_funcionalidades = [
+        "Modelo Hipotético-Dedutivo",
+        "Editor de Tabuleiro",
+        "Banco de Frases",
+        "Exportar Dados",
+    ]
+    funcionalidade_escolhida = st.radio("", opcoes_funcionalidades, key="interactive_section")
 
 if funcionalidade_escolhida == "Modelo Hipotético-Dedutivo":
     mhd_function()
