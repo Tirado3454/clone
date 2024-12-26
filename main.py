@@ -1,10 +1,15 @@
 import streamlit as st
+import pandas as pd  # Certifique-se de que pandas está importado
 from utils.maintexto import mhd_function
 from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
 from utils.export import generate_pdf, generate_csv
 from utils.apresentacao import apresentacao_function
 from utils.contextualizacao import contextualizacao_page_function
+
+# Inicializar o estado do programa
+if "mhd_data" not in st.session_state:
+    st.session_state.mhd_data = pd.DataFrame(columns=["Etapa", "Descrição", "FEN"])
 
 # Configuração inicial
 st.set_page_config(page_title="Modelo Hipotético-Dedutivo no Xadrez", layout="wide")
