@@ -1,6 +1,6 @@
 import streamlit as st
 
-def contextualizacao_page():
+def contextualizacao_page_function():
     st.title("Contextualização")
     
     st.markdown("""
