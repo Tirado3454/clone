@@ -14,29 +14,32 @@ col1, col2 = st.columns([1, 3])
 
 # Coluna 1 - Navegação
 with col1:
-    st.markdown("### Menu de Navegação")
-    opcoes = [
-        "Apresentação",
-        "Contextualização",
+    st.markdown("### Textos Explicativos")
+    texto_opcoes = ["Apresentação", "Contextualização"]
+    texto_selecao = st.radio("Selecione:", texto_opcoes, key="text_navigation")
+
+    st.markdown("### Funcionalidades")
+    func_opcoes = [
         "Modelo Hipotético-Dedutivo",
         "Editor de Tabuleiro",
         "Banco de Frases",
         "Exportar Dados"
     ]
-    selecao = st.radio("Escolha uma opção:", opcoes, key="main_navigation")
+    func_selecao = st.radio("Escolha uma funcionalidade:", func_opcoes, key="func_navigation")
 
 # Coluna 2 - Conteúdo
 with col2:
-    if selecao == "Apresentação":
+    # Verificar se um texto ou uma funcionalidade foi selecionado
+    if texto_selecao == "Apresentação":
         apresentacao_function()
-    elif selecao == "Contextualização":
+    elif texto_selecao == "Contextualização":
         contextualizacao_page_function()
-    elif selecao == "Modelo Hipotético-Dedutivo":
+    elif func_selecao == "Modelo Hipotético-Dedutivo":
         mhd_function()
-    elif selecao == "Editor de Tabuleiro":
+    elif func_selecao == "Editor de Tabuleiro":
         board_editor_function()
-    elif selecao == "Banco de Frases":
+    elif func_selecao == "Banco de Frases":
         phrase_bank_function()
-    elif selecao == "Exportar Dados":
+    elif func_selecao == "Exportar Dados":
         generate_pdf()
         generate_csv()
