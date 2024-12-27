@@ -1,8 +1,36 @@
 import streamlit as st
 
 def contextualizacao_page_function():
+    """
+    Função para exibir a página de contextualização.
+    """
+    # Título da página
     st.title("Contextualização")
-    st.write("Este é o conteúdo da página de contextualização.")
+
+    # Subtítulo para introduzir o contexto
+    st.subheader("Integração de Lógica, Ciência e Estratégia")
+
+    # Texto de contextualização melhorado
+    st.markdown("""
+    Bem-vindo à página de **Contextualização**! Aqui, explicamos o propósito e a base deste projeto, destacando sua relevância e impacto.
+
+    Este programa foi desenvolvido para integrar lógica, ciência e estratégia de forma prática e interativa. Seja no campo educacional ou na aplicação estratégica do xadrez, buscamos criar uma ferramenta que:
+    - 💡 **Estimule o raciocínio lógico.**
+    - 📚 **Promova o aprendizado ativo.**
+    - ♟️ **Facilite o planejamento estratégico.**
+
+    ### Por que isso é importante?
+    - **Lógica**: Base para o pensamento crítico e solução de problemas.
+    - **Ciência**: Metodologia sistemática para explorar e explicar fenômenos.
+    - **Xadrez**: Uma ferramenta poderosa para desenvolver habilidades analíticas e estratégicas.
+
+    Ao combinar esses elementos, nosso programa oferece um ambiente inovador e dinâmico para professores, estudantes, jogadores de xadrez e entusiastas do raciocínio lógico.
+
+    ### Explore mais!
+    - Descubra como aplicar o **Método Hipotético-Dedutivo**.
+    - Utilize ferramentas interativas, como o editor de tabuleiro e o banco de frases.
+    - Registre e exporte suas descobertas para aprimorar seus estudos e estratégias.
+    """)
     
     st.markdown("""
     ## A Importância do Método Hipotético-Dedutivo (MHD) no Contexto Atual
