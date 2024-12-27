@@ -13,10 +13,10 @@ def apresentacao_function():
         Utilizado amplamente nas ciências e em contextos de tomada de decisão, ele se baseia nos seguintes passos fundamentais:
 
         1. 🔍**Observação**: Identificação de um problema ou situação que precisa de explicação.
-        2. **Formulação de Hipóteses**: Criação de suposições ou explicações provisórias para o problema.
-        3. **Dedução de Consequências**: Previsão de resultados que podem ser testados com base nas hipóteses.
-        4. **Teste e Experimentação**: Verificação das previsões através de experimentos ou análises.
-        5. **Conclusão**: Aceitação, rejeição ou reformulação das hipóteses com base nos resultados.
+        2. 💡**Formulação de Hipóteses**: Criação de suposições ou explicações provisórias para o problema.
+        3. 🧪**Dedução de Consequências**: Previsão de resultados que podem ser testados com base nas hipóteses.
+        4. 📊**Teste e Experimentação**: Verificação das previsões através de experimentos ou análises.
+        5. 📘**Conclusão**: Aceitação, rejeição ou reformulação das hipóteses com base nos resultados.
 
         **Exemplo Prático:**
         Imagine que você está jogando xadrez e quer prever o resultado de um movimento estratégico. Usando o MHD:
