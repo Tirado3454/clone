@@ -25,7 +25,7 @@ menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funci
 if menu_type == "Textos":
     text_option = st.sidebar.radio(
         "Escolha uma opção:",
-        ["Apresentação", "Contextualização", "ciência"]
+        ["Apresentação", "Contextualização", "Ciência"]
     )
     if text_option == "Apresentação":
         apresentacao_function()
