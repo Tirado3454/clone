@@ -5,6 +5,7 @@ from utils.frases import phrase_bank_function
 from utils.export import generate_pdf, generate_csv
 from utils.apresentacao import apresentacao_function
 from utils.contextualizacao import contextualizacao_page_function
+from utils.ciencia import ciencia_page_function
 
 # Configuração inicial da página
 st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
@@ -30,6 +31,8 @@ if menu_type == "Textos":
         apresentacao_function()
     elif text_option == "Contextualização":
         contextualizacao_page_function()
+    elif text_option == "Ciência":
+        ciencia_page_function()
 
 # Menu de funcionalidades
 elif menu_type == "Funcionalidades":
