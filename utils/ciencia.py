@@ -1,6 +1,6 @@
 import streamlit as st
 
-def historia_ciencia_page_function():
+def ciencia_page_function():
     """
     Função para exibir a página de História da Ciência.
     """
