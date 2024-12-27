@@ -6,6 +6,7 @@ from utils.export import generate_pdf, generate_csv
 from utils.apresentacao import apresentacao_function
 from utils.contextualizacao import contextualizacao_page_function
 from utils.ciencia import ciencia_page_function
+from utils.metodologia_cientifica import metodologia_cientifica_page_function
 
 # Configuração inicial da página
 st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
@@ -25,7 +26,7 @@ menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funci
 if menu_type == "Textos":
     text_option = st.sidebar.radio(
         "Escolha uma opção:",
-        ["Apresentação", "Contextualização", "Ciência"]
+        ["Apresentação", "Contextualização", "Ciência", "Metodologia Científica"]
     )
     if text_option == "Apresentação":
         apresentacao_function()
@@ -33,6 +34,8 @@ if menu_type == "Textos":
         contextualizacao_page_function()
     elif text_option == "Ciência":
         ciencia_page_function()
+    elif text_option == "Metodologia Científica":
+        metodologia_cientifica_page_function()
 
 # Menu de funcionalidades
 elif menu_type == "Funcionalidades":
