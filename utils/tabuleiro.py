@@ -13,7 +13,7 @@ def board_editor_function():
     def render_tabuleiro_customizado(board):
         return chess.svg.board(
             board=board, 
-            size=320,  # Tamanho do tabuleiro
+            size=200,  # Tamanho do tabuleiro
             style=""" 
                 .square.light { fill: #ffffff; }  /* Casas claras em branco */
                 .square.dark { fill: #8FBC8F; }  /* Casas escuras em verde */
