@@ -6,6 +6,7 @@ from utils.export import generate_pdf, generate_csv
 from utils.apresentacao import apresentacao_function
 from utils.contextualizacao import contextualizacao_page_function
 from utils.ciencia import ciencia_page_function
+from utils.metodos_cientificos import metodos_cientificos_page_function
 from utils.metodologia_cientifica import metodologia_cientifica_page_function
 from utils.steinitz import steinitz_page_function
 from utils.escola_sovietica import escola_sovietica_page_function
@@ -32,7 +33,7 @@ menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funci
 if menu_type == "Textos":
     text_option = st.sidebar.radio(
         "Escolha uma opção:",
-        ["Apresentação", "Contextualização", "Ciência", "Metodologia Científica", "Steinitz e o Xadrez Moderno", "Escola Soviética de Xadrez", "Xadrez e Tecnologias", "O Rating no Xadrez", "Tecnologia no Treinamento", "Campeonatos Mundiais"]
+        ["Apresentação", "Contextualização", "Ciência", "Métodos Científicos", "Metodologia Científica", "Steinitz e o Xadrez Moderno", "Escola Soviética de Xadrez", "Xadrez e Tecnologias", "O Rating no Xadrez", "Tecnologia no Treinamento", "Campeonatos Mundiais"]
     )
     if text_option == "Apresentação":
         apresentacao_function()
@@ -40,6 +41,8 @@ if menu_type == "Textos":
         contextualizacao_page_function()
     elif text_option == "Ciência":
         ciencia_page_function()
+    elif text_option == "Métodos Científicos":
+        metodos_cientificos_page_function()
     elif text_option == "Metodologia Científica":
         metodologia_cientifica_page_function()
     elif text_option == "Steinitz e o Xadrez Moderno":
