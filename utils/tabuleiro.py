@@ -13,7 +13,7 @@ def board_editor_function():
     def render_tabuleiro_customizado(board):
         return chess.svg.board(
             board=board, 
-            size=160,  # Tamanho do tabuleiro
+            size=320,  # Tamanho do tabuleiro
             style=""" 
                 .square.light { fill: #ffffff; }  /* Casas claras em branco */
                 .square.dark { fill: #8FBC8F; }  /* Casas escuras em verde */
@@ -38,7 +38,7 @@ def board_editor_function():
 
     # Visualizar tabuleiro configurado
     st.subheader("Tabuleiro Atual")
-    st.image(render_tabuleiro_customizado(st.session_state.current_board)
+    st.image(render_tabuleiro_customizado(st.session_state.current_board), use_container_width=True)
 
     # Mostrar a FEN atual
     st.subheader("Notação FEN Atual")
