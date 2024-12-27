@@ -4,7 +4,7 @@ def apresentacao_function():
     """
     Função para exibir a página de Apresentação do programa.
     """
-    st.title("Descubra o Método Hipotético-Dedutivo: Uma Jornada de Raciocínio e Aprendizado")
+    st.title("Lógica e Ciência em Ação")
 
     st.header("Seção 1.1 - O que é o Método Hipotético-Dedutivo?")
     st.markdown(
