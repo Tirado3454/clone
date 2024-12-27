@@ -1,10 +1,12 @@
 import streamlit as st
 
-def apresentacao_function():
-    """
-    Função para exibir a página de Apresentação do programa.
-    """
-    st.title("Descubra o Método Hipotético-Dedutivo: Uma Jornada de Raciocínio e Aprendizado")
+# Título chamativo com ícone
+st.markdown("""
+    <div style="text-align: center; font-size: 32px; font-weight: bold;">
+        <img src="https://img.icons8.com/ios/50/000000/chess.png" style="vertical-align: middle;"/> 
+        Lógica e Ciência em Ação
+    </div>
+""", unsafe_allow_html=True)
 
     st.header("Seção 1.1 - O que é o Método Hipotético-Dedutivo?")
     st.markdown(
