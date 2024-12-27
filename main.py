@@ -10,6 +10,7 @@ from utils.metodologia_cientifica import metodologia_cientifica_page_function
 from utils.steinitz import steinitz_page_function
 from utils.escola_sovietica import escola_sovietica_page_function
 from utils.tecnologias_xadrez import tecnologias_xadrez_page_function
+from utils.rating_xadrez import rating_xadrez_page_function
 
 # Configuração inicial da página
 st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
@@ -29,7 +30,7 @@ menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funci
 if menu_type == "Textos":
     text_option = st.sidebar.radio(
         "Escolha uma opção:",
-        ["Apresentação", "Contextualização", "Ciência", "Metodologia Científica", "Steinitz e o Xadrez Moderno", "Escola Soviética de Xadrez", "Xadrez e Tecnologias"]
+        ["Apresentação", "Contextualização", "Ciência", "Metodologia Científica", "Steinitz e o Xadrez Moderno", "Escola Soviética de Xadrez", "Xadrez e Tecnologias", "O Rating no Xadrez"]
     )
     if text_option == "Apresentação":
         apresentacao_function()
@@ -45,7 +46,9 @@ if menu_type == "Textos":
         escola_sovietica_page_function()
     elif text_option == "Xadrez e Tecnologias":
         tecnologias_xadrez_page_function()
-
+    elif text_option == "O Rating no Xadrez":
+        rating_xadrez_page_function()
+    
 # Menu de funcionalidades
 elif menu_type == "Funcionalidades":
     menu_option = st.sidebar.radio(
