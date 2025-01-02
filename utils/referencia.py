@@ -15,7 +15,6 @@ def referencia_page_function():
     st.markdown("""
     - **BRAGA, Marco; GUERRA, Andreia; REIS, José Claúdio.** Breve história da ciência moderna. Rio de Janeiro: Zahar, 2003.  
     - **CALADO, Jorge.** Haja luz! Uma história da química através de tudo. Lisboa: IST Press, 2012.  
-    - **CAMPBELL, M.; HOANE JR, A. J.; HSU, F..** Deep Blue. Artificial Intelligence, 2002. Disponível em: [https://doi.org/10.1016/S0004-3702(01)00129-1](https://doi.org/10.1016/S0004-3702(01)00129-1).  
     - **KUHN, Thomas S.** A estrutura das revoluções científicas. São Paulo: Ed. Perspectiva, 1970.  
     - **POPPER, Karl.** A lógica da pesquisa científica. São Paulo: Cultrix, 1972.  
     - **FEYERABEND, Paul.** Contra o método. Rio de Janeiro: Francisco Alves, 1977.  
