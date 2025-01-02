@@ -14,6 +14,7 @@ from utils.tecnologias_xadrez import tecnologias_xadrez_page_function
 from utils.rating_xadrez import rating_xadrez_page_function
 from utils.tecnologia_no_treinamento import tecnologia_no_treinamento_page_function
 from utils.campeonatos_mundiais import campeonatos_mundiais_page_function
+from utils.referencia import referencias_page_function
 from utils.artigos import artigos_page_function  # Import da página de artigos
 
 # Configuração inicial da página
@@ -34,7 +35,7 @@ menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funci
 if menu_type == "Textos":
     text_option = st.sidebar.radio(
         "Escolha uma opção:",
-        ["Apresentação", "Contextualização", "Ciência", "Métodos Científicos", "Metodologia Científica", "Steinitz e o Xadrez Moderno", "Escola Soviética de Xadrez", "Xadrez e Tecnologias", "O Rating no Xadrez", "Tecnologia no Treinamento", "Campeonatos Mundiais", "Artigos"]
+        ["Apresentação", "Contextualização", "Ciência", "Métodos Científicos", "Metodologia Científica", "Steinitz e o Xadrez Moderno", "Escola Soviética de Xadrez", "Xadrez e Tecnologias", "O Rating no Xadrez", "Tecnologia no Treinamento", "Campeonatos Mundiais", "Referência", "Artigos"]
     )
     if text_option == "Apresentação":
         apresentacao_function()
@@ -58,6 +59,8 @@ if menu_type == "Textos":
         tecnologia_no_treinamento_page_function()
     elif text_option == "Campeonatos Mundiais":
         campeonatos_mundiais_page_function()
+    elif text_option == "Referências":
+        referencia_page_function()
     elif text_option == "Artigos":
         artigos_page_function()
         
