@@ -14,7 +14,7 @@ from utils.tecnologias_xadrez import tecnologias_xadrez_page_function
 from utils.rating_xadrez import rating_xadrez_page_function
 from utils.tecnologia_no_treinamento import tecnologia_no_treinamento_page_function
 from utils.campeonatos_mundiais import campeonatos_mundiais_page_function
-from utils.referencia import referencias_page_function
+from utils.referencia import referencia_page_function
 from utils.artigos import artigos_page_function  # Import da página de artigos
 
 # Configuração inicial da página
