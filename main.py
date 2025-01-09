@@ -1,4 +1,12 @@
 import streamlit as st
+from design import aplicar_estilo  # Se estiver usando um arquivo de estilo
+
+# Definir a configuração da página (deve ser o primeiro comando Streamlit)
+st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
+
+# Aplicar estilo global (se estiver usando design.py)
+aplicar_estilo()
+
 from utils.maintexto import mhd_function
 from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
