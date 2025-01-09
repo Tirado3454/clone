@@ -28,7 +28,7 @@ def planejamento_aula_function():
     # Conteúdo e recursos
     st.header("Conteúdo e Recursos")
     conteudo = st.text_area("Conteúdo", help="Manter. Deve incluir o MHD como processo central, por exemplo: conceitos do MHD (observação, hipótese, teste, análise).Estratégias enxadrísticas aplicadas ao método científico.")
-    recursos = st.text_area("Recursos", help="Liste os materiais e ferramentas necessários para a aula.")
+    recursos = st.text_area("Recursos", help="Especificar os recursos tecnológicos (aplicativo, computadores), materiais (tabuleiros físicos) e visuais (slides ou vídeos).")
 
     # Organização dos espaços
     st.header("Organização dos Espaços")
