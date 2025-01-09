@@ -4,17 +4,14 @@ def apresentacao_function():
     """
     Função para exibir a página de Apresentação do programa.
     """
-    # Logotipos centralizados
-    st.markdown(
-        """
-        <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 20px; margin-bottom: 20px;">
-            <img src="image/ppgect.png" alt="PPGECT" style="width: 120px;"/>
-            <img src="image/capes.png" alt="CAPES" style="width: 120px;"/>
-            <img src="image/utfpr.png" alt="UTFPR" style="width: 120px;"/>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    # Logotipos centralizados com espaçamento
+    col1, col2, col3 = st.columns([1, 1, 1])  # Divisão igual para três colunas
+    with col1:
+        st.image("image/capes.png", width=120)  # Certifique-se de que o caminho está correto
+    with col2:
+        st.image("image/ppgect.png", width=120)
+    with col3:
+        st.image("image/utfpr.png", width=120)
 
     # Introdução
     st.markdown(
