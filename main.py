@@ -127,7 +127,7 @@ elif menu_type == "Funcionalidades":
                     file_name="dados_consolidados.csv",
                     mime="text/csv"
                 )
-                # Menu de planejamento
-   elif menu_type == "Planejamento":
-         planejamento_aula_function()
+# Menu de planejamento
+elif menu_type == "Planejamento":
+    planejamento_aula_function()
 
