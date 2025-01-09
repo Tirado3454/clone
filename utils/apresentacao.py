@@ -4,10 +4,13 @@ def apresentacao_function():
     """
     Função para exibir a página de Apresentação do programa.
     """
-    # Logotipos centralizados com espaçamento
-    col1, col2, col3 = st.columns([1, 1, 1])  # Divisão igual para três colunas
+    # Espaço em branco acima para centralizar visualmente
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    # Colunas centralizadas
+    empty_col, col1, col2, col3, empty_col2 = st.columns([1, 1, 1, 1, 1])  # Espaçamento igual nas laterais
     with col1:
-        st.image("image/capes.png", width=120)  # Certifique-se de que o caminho está correto
+        st.image("image/capes.png", width=120)
     with col2:
         st.image("image/ppgect.png", width=120)
     with col3:
