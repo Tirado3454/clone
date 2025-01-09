@@ -5,12 +5,12 @@ def apresentacao_function():
     Função para exibir a página de Apresentação do programa.
     """
     # Logotipos no topo
-    col1, col2, col3 = st.columns([1, 1, 1])  # Três colunas de mesmo tamanho
+    col1, col3, col5 = st.columns([1, 1, 1])  # Três colunas de mesmo tamanho
     with col1:
         st.image("image/ppgect.png", width=120)  # Logo da PPGECT
-    with col2:
-        st.image("image/capes.png", width=120)  # Logo do CAPES
     with col3:
+        st.image("image/capes.png", width=120)  # Logo do CAPES
+    with col5:
         st.image("image/utfpr.png", width=120)  # Logo da UTFPR
 
     # Título principal abaixo dos logotipos
