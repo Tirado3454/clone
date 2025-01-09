@@ -3,6 +3,7 @@ from utils.maintexto import mhd_function
 from utils.tabuleiro import board_editor_function
 from utils.frases import phrase_bank_function
 from utils.export import generate_pdf, generate_csv
+from utils.plano_aula import planejamento_aula_function
 from utils.apresentacao import apresentacao_function
 from utils.contextualizacao import contextualizacao_page_function
 from utils.ciencia import ciencia_page_function
