@@ -4,7 +4,51 @@ def apresentacao_function():
     """
     Função para exibir a página de Apresentação do programa.
     """
-    st.title("Lógica e Ciência em Ação")
+    # Logotipos no topo
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.image("path_to_logo1.png", width=120)  # Substitua pelo caminho real do logo 1
+    with col2:
+        st.image("path_to_logo2.png", width=120)  # Substitua pelo caminho real do logo 2
+    with col3:
+        st.image("path_to_logo3.png", width=120)  # Substitua pelo caminho real do logo 3
+
+    # Título principal abaixo dos logotipos
+    st.markdown(
+        """
+        <h1 style="text-align: center; color: #4CAF50;">Ensino de Ciência e Xadrez</h1>
+        <p style="text-align: center; color: #555;">Uma abordagem inovadora que conecta raciocínio lógico e método científico</p>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Introdução
+    st.markdown(
+        """
+        <h2 style="text-align: center; color: #4CAF50;">Apresentação</h2>
+        <p style="text-align: justify; color: #555;">
+        Este material foi desenvolvido como parte de uma pesquisa de doutorado conduzida no 
+        <b>Programa de Pós-Graduação em Ensino de Ciência e Tecnologia (PPGECT)</b> da 
+        <b>Universidade Tecnológica Federal do Paraná (UTFPR)</b>, Campus Ponta Grossa. A pesquisa abordou a interseção entre educação, ciência e xadrez, enfatizando o papel dos professores como mediadores no processo de aprendizagem.
+        </p>
+        <p style="text-align: justify; color: #555;">
+        O xadrez, aqui apresentado, é explorado como uma ferramenta pedagógica poderosa, 
+        capaz de desenvolver o pensamento crítico, a alfabetização científica e o raciocínio lógico dos estudantes. Este material propõe uma abordagem prática e inovadora que conecta o método científico ao raciocínio enxadrístico, permitindo que temas específicos sejam explorados de forma lúdica e significativa.
+        </p>
+        <p style="text-align: justify; color: #555;">
+        Por exemplo, o <b>método hipotético-dedutivo</b> é aplicado ao jogo de xadrez: cada movimento no tabuleiro é tratado como uma hipótese que deve ser testada e ajustada conforme as reações do adversário.
+        </p>
+        <p style="text-align: justify; color: #555;">
+        Este eBook foi especialmente pensado para professores, oferecendo ferramentas e estratégias práticas que integram o xadrez ao ensino de conceitos científicos e estratégicos. O objetivo é proporcionar uma experiência interativa que conecte os estudantes ao método científico, promovendo o desenvolvimento de habilidades fundamentais para a vida acadêmica e além.
+        </p>
+        <p style="text-align: justify; color: #555;">
+        Gostaríamos de expressar nosso especial agradecimento ao <b>Professor Doutor Luiz Pilatti</b>, pela orientação e valiosas contribuições ao longo do desenvolvimento deste trabalho.
+        </p>
+        """,
+        unsafe_allow_html=True
+    )
+
+    st.markdown("---")  # Divisor para separar a introdução das seções principais
 
     st.header("Seção 1.1 - O que é o Método Hipotético-Dedutivo?")
     st.markdown(
