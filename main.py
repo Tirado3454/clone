@@ -129,5 +129,5 @@ elif menu_type == "Funcionalidades":
                 )
                 # Menu de planejamento
     elif menu_type == "Planejamento":
-        planejamento_aula_function()
+          planejamento_aula_function()
 
