@@ -130,5 +130,24 @@ elif menu_type == "Funcionalidades":
                 )
 # Menu de planejamento
 elif menu_type == "Planejamento":
-    planejamento_aula_function()
+    planning_option = st.sidebar.radio(
+        "Escolha uma opção:",
+        ["Plano de Aula", "Acessar PDFs"]
+    )
 
+    # Opção de Plano de Aula
+    if planning_option == "Plano de Aula":
+        planejamento_aula_function()  # Chama a função existente
+
+    # Opção de Acessar PDFs
+    elif planning_option == "Acessar PDFs":
+        st.title("Repositório de PDFs")
+        st.markdown("### PDFs Disponíveis para Download")
+        # Exemplo de links para PDFs existentes
+        pdfs = {
+            "Planejamento Aula 1": "https://exemplo.com/planejamento_aula1.pdf",
+            "Planejamento Aula 2": "https://exemplo.com/planejamento_aula2.pdf",
+            "Planejamento Aula 3": "https://exemplo.com/planejamento_aula3.pdf",
+        }
+        for nome, link in pdfs.items():
+            st.markdown(f"- [{nome}]({link})")
