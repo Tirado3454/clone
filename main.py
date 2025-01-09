@@ -31,10 +31,10 @@ if "phrases_selected" not in st.session_state:
     st.session_state["phrases_selected"] = []
 
 # Divisão do menu
-menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funcionalidades", "Planejamento"])
+menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["📖 Textos", "⚙️ Funcionalidades", "🗂 Planejamento"])
 
 # Menu de textos
-if menu_type == "Textos":
+if menu_type == "📖 Textos":
     text_option = st.sidebar.radio(
         "Escolha uma opção:",
         ["Apresentação", "Contextualização", "Ciência", "Métodos Científicos", "Metodologia Científica", "Steinitz e o Xadrez Moderno", "Escola Soviética de Xadrez", "Xadrez e Tecnologias", "O Rating no Xadrez", "Tecnologia no Treinamento", "Campeonatos Mundiais", "Referências", "Artigos"]
@@ -67,7 +67,7 @@ if menu_type == "Textos":
         artigos_page_function()
         
 # Menu de funcionalidades
-elif menu_type == "Funcionalidades":
+elif menu_type == "⚙️ Funcionalidades":
     menu_option = st.sidebar.radio(
         "Escolha uma funcionalidade:",
         ["Modelo Hipotético-Dedutivo", "Editor de Tabuleiro", "Banco de Frases", "Exportar Dados"]
@@ -130,7 +130,7 @@ elif menu_type == "Funcionalidades":
                     mime="text/csv"
                 )
 # Menu de planejamento
-elif menu_type == "Planejamento":
+elif menu_type == "🗂 Planejamento":
     planning_option = st.sidebar.radio(
         "Escolha uma opção:",
         ["Plano de Aula", "Acessar PDFs"]
