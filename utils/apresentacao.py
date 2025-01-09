@@ -8,8 +8,8 @@ def apresentacao_function():
     st.markdown(
         """
         <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 20px; margin-bottom: 20px;">
-            <img src="image/capes.png" alt="CAPES" style="width: 120px;"/>
             <img src="image/ppgect.png" alt="PPGECT" style="width: 120px;"/>
+            <img src="image/capes.png" alt="CAPES" style="width: 120px;"/>
             <img src="image/utfpr.png" alt="UTFPR" style="width: 120px;"/>
         </div>
         """,
