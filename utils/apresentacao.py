@@ -3,22 +3,15 @@ import streamlit as st
 def apresentacao_function():
     """
     Função para exibir a página de Apresentação do programa.
-       st.markdown(
     """
-    <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 20px; margin-bottom: 20px;">
-        <img src="image/capes.png" alt="CAPES" style="width: 120px;"/>
-        <img src="image/ppgect.png" alt="PPGECT" style="width: 120px;"/>
-        <img src="image/utfpr.png" alt="UTFPR" style="width: 120px;"/>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-    # Título principal abaixo dos logotipos
+    # Logotipos centralizados
     st.markdown(
         """
-        <h1 style="text-align: center; color: #4CAF50;">Ensino de Ciência e Xadrez</h1>
-        <p style="text-align: center; color: #555;">Uma abordagem inovadora que conecta raciocínio lógico e método científico</p>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 40px; margin-top: 20px; margin-bottom: 20px;">
+            <img src="image/capes.png" alt="CAPES" style="width: 120px;"/>
+            <img src="image/ppgect.png" alt="PPGECT" style="width: 120px;"/>
+            <img src="image/utfpr.png" alt="UTFPR" style="width: 120px;"/>
+        </div>
         """,
         unsafe_allow_html=True
     )
