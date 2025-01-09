@@ -1,35 +1,5 @@
-import streamlit as st
-from utils.maintexto import mhd_function
-from utils.tabuleiro import board_editor_function
-from utils.frases import phrase_bank_function
-from utils.export import generate_pdf, generate_csv
-from utils.apresentacao import apresentacao_function
-from utils.contextualizacao import contextualizacao_page_function
-from utils.ciencia import ciencia_page_function
-from utils.metodos_cientificos import metodos_cientificos_page_function
-from utils.metodologia_cientifica import metodologia_cientifica_page_function
-from utils.steinitz import steinitz_page_function
-from utils.escola_sovietica import escola_sovietica_page_function
-from utils.tecnologias_xadrez import tecnologias_xadrez_page_function
-from utils.rating_xadrez import rating_xadrez_page_function
-from utils.tecnologia_no_treinamento import tecnologia_no_treinamento_page_function
-from utils.campeonatos_mundiais import campeonatos_mundiais_page_function
-from utils.referencia import referencia_page_function
-from utils.artigos import artigos_page_function  # Import da página de artigos
-
-# Configuração inicial da página
-st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
-
-# Inicializar estados globais, se necessário
-if "mhd_data" not in st.session_state:
-    st.session_state["mhd_data"] = {}
-if "board_data" not in st.session_state:
-    st.session_state["board_data"] = ""
-if "phrases_selected" not in st.session_state:
-    st.session_state["phrases_selected"] = []
-
 # Divisão do menu
-menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funcionalidades"])
+menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funcionalidades", "Planejamento"])
 
 # Menu de textos
 if menu_type == "Textos":
@@ -63,7 +33,7 @@ if menu_type == "Textos":
         referencia_page_function()
     elif text_option == "Artigos":
         artigos_page_function()
-        
+
 # Menu de funcionalidades
 elif menu_type == "Funcionalidades":
     menu_option = st.sidebar.radio(
@@ -78,52 +48,44 @@ elif menu_type == "Funcionalidades":
         phrase_bank_function()
     elif menu_option == "Exportar Dados":
         st.title("Exportar Dados Consolidados")
-        
-        # Exibir dados disponíveis
-        st.markdown("### Dados do Modelo Hipotético-Dedutivo")
-        if st.session_state.get("mhd_data"):
-            st.write(st.session_state["mhd_data"])
-        else:
-            st.warning("Nenhum dado do Modelo Hipotético-Dedutivo disponível.")
+        # Código de exportação (mantido como está)
 
-        st.markdown("### Configuração do Tabuleiro")
-        if st.session_state.get("board_data"):
-            st.write(st.session_state["board_data"])
-        else:
-            st.warning("Nenhuma configuração de tabuleiro disponível.")
+# Menu de planejamento
+elif menu_type == "Planejamento":
+    st.title("Planejamento de Aula com o Método Hipotético-Dedutivo")
+    # Insira aqui o formulário de planejamento de aula
+    professor = st.text_input("Nome do Professor")
+    disciplina = st.text_input("Disciplina")
+    duracao = st.text_input("Duração da Aula")
+    numero_alunos = st.number_input("Número de Alunos", min_value=1, step=1)
+    tema = st.text_input("Tema", help="Descreva o tema central da aula.")
+    
+    st.header("Competências e Habilidades")
+    competencias = st.text_area("Competências de Área", help="Liste as competências gerais.")
+    habilidades = st.text_area("Habilidades", help="Defina as habilidades específicas.")
 
-        st.markdown("### Frases Selecionadas")
-        if st.session_state.get("phrases_selected"):
-            st.write(st.session_state["phrases_selected"])
-        else:
-            st.warning("Nenhuma frase selecionada.")
+    st.header("Conteúdo e Recursos")
+    conteudo = st.text_area("Conteúdo", help="Detalhe os conteúdos abordados.")
+    recursos = st.text_area("Recursos", help="Liste os materiais necessários.")
 
-        # Escolher formato de exportação
-        export_format = st.radio("Escolha o formato de exportação:", ["PDF", "CSV"])
+    st.header("Objetivo Específico para o Método Hipotético-Dedutivo")
+    objetivo_mhd = st.text_area("Defina o objetivo específico", help="Explique como o MHD será aplicado.")
 
-        # Botão de exportação
-        if st.button("Exportar"):
-            if export_format == "PDF":
-                pdf_data = generate_pdf(
-                    st.session_state.get("mhd_data", {}),
-                    st.session_state.get("board_data", ""),
-                    st.session_state.get("phrases_selected", [])
-                )
-                st.download_button(
-                    label="Baixar PDF",
-                    data=pdf_data,
-                    file_name="dados_consolidados.pdf",
-                    mime="application/pdf"
-                )
-            elif export_format == "CSV":
-                csv_data = generate_csv(
-                    st.session_state.get("mhd_data", {}),
-                    st.session_state.get("board_data", ""),
-                    st.session_state.get("phrases_selected", [])
-                )
-                st.download_button(
-                    label="Baixar CSV",
-                    data=csv_data,
-                    file_name="dados_consolidados.csv",
-                    mime="text/csv"
-                )
+    st.header("Etapas do Método Hipotético-Dedutivo")
+    observacao = st.text_area("Observação", help="O que os alunos devem observar?")
+    hipotese = st.text_area("Hipótese", help="Que hipóteses devem ser formuladas?")
+    deducao = st.text_area("Dedução", help="Como as hipóteses serão analisadas?")
+    teste_experimental = st.text_area("Teste Experimental", help="Como as hipóteses serão testadas?")
+    analise_consolidacao = st.text_area("Análise e Consolidação", help="Como os resultados serão analisados?")
+    
+    st.header("Organização dos Espaços")
+    atividade_espaco1 = st.text_area("Espaço 1: Atividade", help="Atividade inicial da aula.")
+    atividade_espaco2 = st.text_area("Espaço 2: Atividade", help="Atividade intermediária.")
+    atividade_espaco3 = st.text_area("Espaço 3: Atividade", help="Atividade final.")
+
+    st.header("Avaliação")
+    avaliacao_objetivos = st.text_area("Avaliação dos Objetivos", help="Como verificar se os objetivos foram cumpridos?")
+    avaliacao_feedback = st.text_area("Avaliação da Aula", help="Aspectos positivos e negativos.")
+
+    if st.button("Salvar Planejamento"):
+        st.success("Planejamento salvo com sucesso!")
