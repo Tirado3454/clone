@@ -145,7 +145,7 @@ elif menu_type == "Planejamento":
         st.markdown("### PDFs Disponíveis para Download")
         # Exemplo de links para PDFs existentes
         pdfs = {
-            "Planejamento Aula 1": "https://exemplo.com/planejamento_aula1.pdf",
+            "Template Planejamento Aula": "https://github.com/Tirado3454/clone/blob/main/pdfs/plano%20de%20aula_Xadrez.pdf",
             "Planejamento Aula 2": "https://exemplo.com/planejamento_aula2.pdf",
             "Planejamento Aula 3": "https://exemplo.com/planejamento_aula3.pdf",
         }
