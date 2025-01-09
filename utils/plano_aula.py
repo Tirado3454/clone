@@ -1,7 +1,7 @@
 import streamlit as st
 
-# Título da página
-st.title("Plano de Aula Interativo - Xadrez e Método Hipotético-Dedutivo")
+def planejamento_aula_function():
+    st.title("Plano de Aula Interativo - Xadrez e Método Hipotético-Dedutivo")
 
 # Informações básicas
 st.header("Informações Básicas")
