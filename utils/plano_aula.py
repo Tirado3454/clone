@@ -1,3 +1,4 @@
+import streamlit as st
 def planejamento_aula_function():
     st.title("Plano de Aula - Método Hipotético-Dedutivo")
 
