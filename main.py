@@ -29,7 +29,7 @@ if "phrases_selected" not in st.session_state:
     st.session_state["phrases_selected"] = []
 
 # Divisão do menu
-menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funcionalidades"])
+menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["Textos", "Funcionalidades", "Planejamento"])
 
 # Menu de textos
 if menu_type == "Textos":
@@ -127,3 +127,7 @@ elif menu_type == "Funcionalidades":
                     file_name="dados_consolidados.csv",
                     mime="text/csv"
                 )
+                # Menu de planejamento
+elif menu_type == "Planejamento":
+    planejamento_aula_function()
+
