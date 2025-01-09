@@ -128,6 +128,6 @@ elif menu_type == "Funcionalidades":
                     mime="text/csv"
                 )
                 # Menu de planejamento
-elif menu_type == "Planejamento":
-    planejamento_aula_function()
+   elif menu_type == "Planejamento":
+         planejamento_aula_function()
 
