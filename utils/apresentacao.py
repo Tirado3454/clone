@@ -7,9 +7,9 @@ def apresentacao_function():
     # Logotipos no topo
     col1, col2, col3 = st.columns([1, 1, 1])  # Três colunas de mesmo tamanho
     with col1:
-        st.image("image/capes.png", width=120)  # Logo da CAPES
+        st.image("image/ppgect.png", width=120)  # Logo da PPGECT
     with col2:
-        st.image("image/ppgect.png", width=120)  # Logo do PPGECT
+        st.image("image/capes.png", width=120)  # Logo do CAPES
     with col3:
         st.image("image/utfpr.png", width=120)  # Logo da UTFPR
 
