@@ -31,7 +31,7 @@ if "phrases_selected" not in st.session_state:
     st.session_state["phrases_selected"] = []
 
 # Divisão do menu
-menu_type = st.sidebar.radio("Selecione o tipo de conteúdo:", ["📖 Textos", "⚙️ Funcionalidades", "🗂 Planejamento"])
+menu_type = st.sidebar.radio("📂 Selecione o tipo de conteúdo:", ["📖 Textos", "⚙️ Funcionalidades", "🗂 Planejamento"])
 
 # Menu de textos
 if menu_type == "📖 Textos":
