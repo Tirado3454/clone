@@ -7,11 +7,11 @@ def apresentacao_function():
     # Logotipos no topo
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.image("path_to_logo1.png", width=120)  # Substitua pelo caminho real do logo 1
+        st.image("images/capes.png", width=120, caption="CAPES")  # Logo da CAPES
     with col2:
-        st.image("path_to_logo2.png", width=120)  # Substitua pelo caminho real do logo 2
+        st.image("images/ppgect.png", width=120, caption="PPGECT")  # Logo do PPGECT
     with col3:
-        st.image("path_to_logo3.png", width=120)  # Substitua pelo caminho real do logo 3
+        st.image("images/utfpr.png", width=120, caption="UTFPR")  # Logo da UTFPR
 
     # Título principal abaixo dos logotipos
     st.markdown(
