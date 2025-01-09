@@ -10,9 +10,9 @@ def apresentacao_function():
     # Colunas centralizadas
     empty_col, col1, col2, col3, empty_col2 = st.columns([1, 1, 1, 1, 1])  # Espaçamento igual nas laterais
     with col1:
-        st.image("image/capes.png", width=120)
-    with col2:
         st.image("image/ppgect.png", width=120)
+    with col2:
+        st.image("image/capes.png", width=120)
     with col3:
         st.image("image/utfpr.png", width=120)
 
