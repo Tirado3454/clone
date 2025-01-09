@@ -18,12 +18,12 @@ def planejamento_aula_function():
     disciplina = st.text_input("Disciplina")
     duracao = st.text_input("Duração da Aula")
     numero_alunos = st.number_input("Número de Alunos", min_value=1, step=1)
-    tema = st.text_input("Tema", help="Deve refletir a integração entre o MHD e o xadrez, por exemplo: aplicação do Método Hipotético-Dedutivo no Xadrez Estratégico")
+    tema = st.text_input("Tema", help="Deve refletir a integração entre o MHD e o xadrez como a aplicação do Método Hipotético-Dedutivo no Xadrez Estratégico")
 
     # Competências e habilidades
     st.header("Competências e Habilidades")
     competencias = st.text_area("Competências de Área", help="Alinhar às competências gerais e específicas da BNCC ou de outras diretrizes educacionais")
-    habilidades = st.text_area("Habilidades", help="Detalhar habilidades voltadas ao MHD, como formular hipóteses, testar estratégias, "avaliar resultados")
+    habilidades = st.text_area("Habilidades", help="Detalhar habilidades voltadas ao MHD, como formular hipóteses, testar estratégias, avaliar resultados")
 
     # Conteúdo e recursos
     st.header("Conteúdo e Recursos")
