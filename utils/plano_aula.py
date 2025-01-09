@@ -1,12 +1,10 @@
 import streamlit as st
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from io import BytesIO
+
 def planejamento_aula_function():
     st.title("Plano de Aula - Método Hipotético-Dedutivo")
-
-    # Introdução
-    st.markdown("""
-    Bem-vindo ao planejamento de aula! Aqui você poderá estruturar uma aula completa com base no Método Hipotético-Dedutivo, 
-    integrando o xadrez ao ensino de ciência e tecnologia.
-    """)
 
     # Página 1 - Informações Básicas
     st.header("Informações Básicas")
@@ -51,5 +49,61 @@ def planejamento_aula_function():
     reflexao_final = st.text_area("Reflexão Final", help="Descreva os aprendizados e reflexões finais da aula.")
 
     # Botão para salvar ou exportar o planejamento
-    if st.button("Gerar Planejamento"):
-        st.success("Planejamento gerado com sucesso!")
+    if st.button("Gerar e Exportar PDF"):
+        buffer = BytesIO()
+        c = canvas.Canvas(buffer, pagesize=letter)
+        c.setFont("Helvetica", 12)
+
+        # Adicionar título
+        c.drawString(100, 750, "Planejamento de Aula - Método Hipotético-Dedutivo")
+
+        # Adicionar informações básicas
+        y = 700
+        c.drawString(50, y, f"Nome do Professor: {professor}")
+        y -= 20
+        c.drawString(50, y, f"Disciplina: {disciplina}")
+        y -= 20
+        c.drawString(50, y, f"Duração da Aula: {duracao}")
+        y -= 20
+        c.drawString(50, y, f"Número de Alunos: {numero_alunos}")
+        y -= 20
+        c.drawString(50, y, f"Tema: {tema}")
+        y -= 40
+
+        # Competências e habilidades
+        c.drawString(50, y, "Competências de Área:")
+        y -= 20
+        for line in competencias.split("\n"):
+            c.drawString(70, y, line)
+            y -= 20
+        c.drawString(50, y, "Habilidades:")
+        y -= 20
+        for line in habilidades.split("\n"):
+            c.drawString(70, y, line)
+            y -= 20
+        y -= 20
+
+        # Conteúdo e recursos
+        c.drawString(50, y, "Conteúdo:")
+        y -= 20
+        for line in conteudo.split("\n"):
+            c.drawString(70, y, line)
+            y -= 20
+        c.drawString(50, y, "Recursos:")
+        y -= 20
+        for line in recursos.split("\n"):
+            c.drawString(70, y, line)
+            y -= 20
+        y -= 20
+
+        # Fechando o PDF
+        c.save()
+        buffer.seek(0)
+
+        # Botão de download
+        st.download_button(
+            label="Baixar PDF",
+            data=buffer,
+            file_name="planejamento_aula.pdf",
+            mime="application/pdf"
+        )
