@@ -22,12 +22,12 @@ def planejamento_aula_function():
 
     # Competências e habilidades
     st.header("Competências e Habilidades")
-    competencias = st.text_area("Competências de Área", help="Liste as competências gerais a serem desenvolvidas.")
-    habilidades = st.text_area("Habilidades", help="Defina as habilidades específicas para a aula.")
+    competencias = st.text_area("Competências de Área", help="Alinhar às competências gerais e específicas da BNCC ou de outras diretrizes educacionais")
+    habilidades = st.text_area("Habilidades", help="Detalhar habilidades voltadas ao MHD, como formular hipóteses, testar estratégias, "avaliar resultados")
 
     # Conteúdo e recursos
     st.header("Conteúdo e Recursos")
-    conteudo = st.text_area("Conteúdo", help="Descreva os tópicos e conceitos que serão abordados.")
+    conteudo = st.text_area("Conteúdo", help="Manter. Deve incluir o MHD como processo central, por exemplo: conceitos do MHD (observação, hipótese, teste, análise).Estratégias enxadrísticas aplicadas ao método científico.")
     recursos = st.text_area("Recursos", help="Liste os materiais e ferramentas necessários para a aula.")
 
     # Organização dos espaços
