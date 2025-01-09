@@ -17,6 +17,9 @@ from utils.campeonatos_mundiais import campeonatos_mundiais_page_function
 from utils.referencia import referencia_page_function
 from utils.artigos import artigos_page_function  # Import da página de artigos
 from utils.plano_aula import planejamento_aula_function
+from design import aplicar_estilo
+
+aplicar_estilo()
 
 # Configuração inicial da página
 st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
