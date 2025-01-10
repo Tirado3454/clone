@@ -102,6 +102,17 @@ def planejamento_aula_function():
             ("Habilidades", habilidades),
             ("Conteúdo", conteudo),
             ("Recursos", recursos),
+ ]
+
+        # Adicionar organização dos espaços ao PDF
+        for i, (atividade, duracao_espaco, papel_aluno, papel_professor) in enumerate(espacos, start=1):
+            sections.append((f"Espaço {i} - Atividade", atividade))
+            sections.append((f"Espaço {i} - Duração", duracao_espaco))
+            sections.append((f"Espaço {i} - Papel do Aluno", papel_aluno))
+            sections.append((f"Espaço {i} - Papel do Professor", papel_professor))
+
+        # Continuar com os campos restantes
+        sections += [
             ("Avaliação dos Objetivos", avaliacao_objetivos),
             ("Avaliação da Aula", avaliacao_aula),
             ("Observação", observacao),
