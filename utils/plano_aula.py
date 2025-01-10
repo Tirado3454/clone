@@ -56,21 +56,25 @@ def planejamento_aula_function():
         questionamentos = st.text_area("Questionamentos Norteadores:", help="Liste perguntas que guiem os alunos.")
         reflexao = st.text_area("Reflexão Final:", help="Escreva a reflexão final sobre a aula.")
 
-        # Botão para submeter os dados
-        submitted = st.form_submit_button("Gerar PDF")
+      submitted = st.form_submit_button("Gerar PDF")
 
-    # Gerar o PDF com os dados preenchidos
     if submitted:
+        # Geração do PDF
         buffer = BytesIO()
         c = canvas.Canvas(buffer, pagesize=letter)
         width, height = letter
 
-        # Título do PDF
-        c.setFont("Helvetica-Bold", 16)
-        c.drawCentredString(width / 2, height - 50, "Planejamento de Aula - Método Hipotético-Dedutivo")
+        # Ajustar margens
+        margin_x = 50
+        margin_y = 50
+        y = height - margin_y
 
-        # Preencher os campos no PDF
-        y = height - 100  # Altura inicial
+        # Título
+        c.setFont("Helvetica-Bold", 16)
+        c.drawCentredString(width / 2, y, "Planejamento de Aula - Método Hipotético-Dedutivo")
+        y -= 40
+
+        # Conteúdo
         c.setFont("Helvetica", 12)
         for label, value in [
             ("Nome do Professor", professor),
@@ -78,36 +82,36 @@ def planejamento_aula_function():
             ("Duração da Aula", duracao),
             ("Número de Alunos", numero_alunos),
             ("Tema", tema),
-            ("Competência de Área", competencia),
-            ("Habilidades", habilidades),
             ("Conteúdo", conteudo),
-            ("Recursos", recursos),
-            # Organização dos Espaços
-            ("Espaço 1 - Atividade", espaco1_atividade),
-            ("Espaço 1 - Duração", espaco1_duracao),
-            ("Espaço 1 - Papel do Aluno", espaco1_papel_aluno),
-            ("Espaço 1 - Papel do Professor", espaco1_papel_professor),
-            # Avaliação
-            ("Avaliação dos Objetivos", avaliacao_objetivos),
-            ("Avaliação da Aula", avaliacao_aula),
-            # Reflexão Final
             ("Reflexão Final", reflexao),
         ]:
-            c.drawString(50, y, f"{label}: {value}")
+            lines = c.wrapOn(c, width - 2 * margin_x, height - 2 * margin_y)
+            c.drawString(margin_x, y, f"{label}: {value}")
             y -= 20
-            if y < 50:  # Nova página
+            if y < margin_y:  # Adiciona uma nova página se ultrapassar os limites
                 c.showPage()
+                y = height - margin_y
                 c.setFont("Helvetica", 12)
-                y = height - 50
 
         # Finalizar o PDF
         c.save()
         buffer.seek(0)
 
+        # Converter o PDF em base64 para exibição no navegador
+        pdf_data = buffer.getvalue()
+        pdf_base64 = base64.b64encode(pdf_data).decode('utf-8')
+
+        # Visualização no Streamlit
+        st.markdown("### Visualização do PDF")
+        st.markdown(
+            f'<iframe src="data:application/pdf;base64,{pdf_base64}" width="700" height="500"></iframe>',
+            unsafe_allow_html=True
+        )
+
         # Botão para download do PDF
         st.download_button(
             label="Baixar PDF",
-            data=buffer,
+            data=pdf_data,
             file_name="planejamento_aula.pdf",
             mime="application/pdf"
         )
