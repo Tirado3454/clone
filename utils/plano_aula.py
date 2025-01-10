@@ -1,7 +1,7 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from reportlab.pdfbase.pdfmetrics import stringWidth
 from io import BytesIO
+import base64
 import streamlit as st
 
 def planejamento_aula_function():
@@ -70,7 +70,7 @@ def planejamento_aula_function():
             words = text.split()
             line = ""
             for word in words:
-                if stringWidth(line + word, "Helvetica", 12) < max_width:
+                if canvas.stringWidth(line + word, "Helvetica", 12) < max_width:
                     line += word + " "
                 else:
                     canvas.drawString(x, y, line.strip())
@@ -129,10 +129,14 @@ def planejamento_aula_function():
         c.save()
         buffer.seek(0)
 
+        # Obter os dados do PDF
+        pdf_data = buffer.getvalue()
+
+        # Codificar para base64 para visualização
+        pdf_base64 = base64.b64encode(pdf_data).decode("utf-8")
+
         # Visualizar no navegador
         st.markdown("### Visualização do PDF")
-        pdf_data = buffer.getvalue()
-        pdf_base64 = base64.b64encode(pdf_data).decode("utf-8")
         st.markdown(
             f'<iframe src="data:application/pdf;base64,{pdf_base64}" width="700" height="500"></iframe>',
             unsafe_allow_html=True,
