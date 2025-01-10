@@ -57,7 +57,7 @@ def planejamento_aula_function():
         submitted = st.form_submit_button("Gerar PDF")
 
     if submitted:
-        # Geração do PDF (mantém a versão anterior do PDF, pois já está funcional)
+        # Geração do PDF
         buffer = BytesIO()
         c = canvas.Canvas(buffer, pagesize=letter)
         width, height = letter
@@ -65,7 +65,7 @@ def planejamento_aula_function():
         margin_y = 50
         y = height - margin_y
 
-        # Função auxiliar para texto e margens
+        # Função auxiliar para justificar texto e verificar quebra de página
         def draw_wrapped_text(canvas, text, x, y, max_width, line_height):
             words = text.split()
             line = ""
@@ -76,7 +76,7 @@ def planejamento_aula_function():
                 else:
                     canvas.drawString(x, y, line)
                     y -= line_height
-                    if y < margin_y:
+                    if y < margin_y:  # Verificar margem inferior
                         canvas.showPage()
                         y = height - margin_y
                         canvas.setFont("Helvetica", 12)
@@ -84,7 +84,7 @@ def planejamento_aula_function():
             if line:
                 canvas.drawString(x, y, line)
                 y -= line_height
-                if y < margin_y:
+                if y < margin_y:  # Verificar margem inferior novamente
                     canvas.showPage()
                     y = height - margin_y
                     canvas.setFont("Helvetica", 12)
@@ -130,6 +130,11 @@ def planejamento_aula_function():
 
         # Exibir e baixar PDF
         pdf_data = buffer.getvalue()
+        st.markdown("### Visualização do PDF")
+        st.markdown(
+            f'<iframe src="data:application/pdf;base64,{base64.b64encode(pdf_data).decode()}" width="700" height="500"></iframe>',
+            unsafe_allow_html=True,
+        )
         st.download_button(
             label="Baixar PDF",
             data=pdf_data,
