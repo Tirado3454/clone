@@ -81,9 +81,9 @@ def planejamento_aula_function():
                 y -= line_height
             return y
 
-        # Escrever conteúdo no PDF
+        # Escrever conteúdo no PDF na mesma ordem do formulário
         c.setFont("Helvetica", 12)
-        sections = [
+        form_sections = [
             ("Nome do Professor", professor),
             ("Disciplina", disciplina),
             ("Duração da Aula", duracao),
@@ -93,6 +93,12 @@ def planejamento_aula_function():
             ("Habilidades", habilidades),
             ("Conteúdo", conteudo),
             ("Recursos", recursos),
+            # Organização dos Espaços
+            ("Espaços", None),
+            *[(f"Espaço {i} - Atividade", atividade) for i, (atividade, _, _, _) in enumerate(espacos, 1)],
+            *[(f"Espaço {i} - Duração", duracao) for i, (_, duracao, _, _) in enumerate(espacos, 1)],
+            *[(f"Espaço {i} - Papel do Aluno", papel_aluno) for i, (_, _, papel_aluno, _) in enumerate(espacos, 1)],
+            *[(f"Espaço {i} - Papel do Professor", papel_professor) for i, (_, _, _, papel_professor) in enumerate(espacos, 1)],
             ("Avaliação dos Objetivos", avaliacao_objetivos),
             ("Avaliação da Aula", avaliacao_aula),
             ("Observação", observacao),
@@ -105,25 +111,20 @@ def planejamento_aula_function():
             ("Reflexão Final", reflexao),
         ]
 
-        for label, value in sections:
-            c.drawString(margin_x, y, f"{label}:")
+        for label, value in form_sections:
+            if value is None:  # Título de seção
+                c.setFont("Helvetica-Bold", 12)
+                c.drawString(margin_x, y, label)
+                c.setFont("Helvetica", 12)
+            else:  # Campo de texto
+                c.drawString(margin_x, y, f"{label}:")
+                y -= 20
+                y = draw_wrapped_text(c, value, margin_x + 20, y, width - 2 * margin_x, 15)
             y -= 20
-            y = draw_wrapped_text(c, value, margin_x + 20, y, width - 2 * margin_x, 15)
             if y < margin_y:
                 c.showPage()
                 y = height - margin_y
-
-        # Espaços
-        for i, (atividade, duracao_espaco, papel_aluno, papel_professor) in enumerate(espacos, start=1):
-            c.drawString(margin_x, y, f"Espaço {i}:")
-            y -= 20
-            y = draw_wrapped_text(c, f"Atividade: {atividade}", margin_x + 20, y, width - 2 * margin_x, 15)
-            y = draw_wrapped_text(c, f"Duração: {duracao_espaco}", margin_x + 20, y, width - 2 * margin_x, 15)
-            y = draw_wrapped_text(c, f"Papel do Aluno: {papel_aluno}", margin_x + 20, y, width - 2 * margin_x, 15)
-            y = draw_wrapped_text(c, f"Papel do Professor: {papel_professor}", margin_x + 20, y, width - 2 * margin_x, 15)
-            if y < margin_y:
-                c.showPage()
-                y = height - margin_y
+                c.setFont("Helvetica", 12)
 
         # Finalizar o PDF
         c.save()
