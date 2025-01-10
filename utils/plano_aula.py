@@ -11,8 +11,8 @@ def planejamento_aula_function():
         # Parte 1
         professor = st.text_input("Nome do Professor:", help="Digite o nome do professor responsável pela aula.")
         disciplina = st.text_input("Disciplina:", help="Informe a disciplina para a qual a aula será planejada.")
-        duracao = st.text_input("Duração da Aula:", "1 hora", help="Tempo total planejado para a aula.")
-        numero_alunos = st.text_input("Número de Alunos:", "20", help="Quantidade de alunos esperada na aula.")
+        duracao = st.text_input("Duração da Aula:", help="Tempo total planejado para a aula.")
+        numero_alunos = st.text_input("Número de Alunos:", help="Quantidade de alunos esperada na aula.")
         tema = st.text_input("Tema:", help="Especifique o tema principal da aula.")
         
         competencia = st.text_area("Competência de Área:", help="Descreva a competência relacionada à área de ensino.")
