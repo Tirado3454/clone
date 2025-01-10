@@ -65,20 +65,40 @@ def planejamento_aula_function():
         margin_y = 50
         y = height - margin_y
 
-        # Função auxiliar para quebrar texto
-        def draw_wrapped_text(canvas, text, x, y, max_width, line_height):
+        # Função auxiliar para justificar texto
+        def draw_justified_text(canvas, text, x, y, max_width, line_height):
             words = text.split()
-            line = ""
+            lines = []
+            line = []
+
+            # Criar as linhas
             for word in words:
-                if canvas.stringWidth(line + word, "Helvetica", 12) < max_width:
-                    line += word + " "
+                test_line = " ".join(line + [word])
+                if canvas.stringWidth(test_line, "Helvetica", 12) <= max_width:
+                    line.append(word)
                 else:
-                    canvas.drawString(x, y, line.strip())
-                    y -= line_height
-                    line = word + " "
+                    lines.append(line)
+                    line = [word]
             if line:
-                canvas.drawString(x, y, line.strip())
+                lines.append(line)
+
+            # Desenhar as linhas justificadas
+            for line in lines[:-1]:  # Justificar todas as linhas, exceto a última
+                line_text = " ".join(line)
+                total_width = canvas.stringWidth(line_text, "Helvetica", 12)
+                extra_space = (max_width - total_width) / (len(line) - 1) if len(line) > 1 else 0
+                x_pos = x
+                for word in line:
+                    canvas.drawString(x_pos, y, word)
+                    x_pos += canvas.stringWidth(word, "Helvetica", 12) + extra_space
                 y -= line_height
+
+            # Última linha não é justificada
+            if lines:
+                line_text = " ".join(lines[-1])
+                canvas.drawString(x, y, line_text)
+                y -= line_height
+
             return y
 
         # Escrever conteúdo no PDF na mesma ordem do formulário
@@ -119,7 +139,7 @@ def planejamento_aula_function():
             else:  # Campo de texto
                 c.drawString(margin_x, y, f"{label}:")
                 y -= 20
-                y = draw_wrapped_text(c, value, margin_x + 20, y, width - 2 * margin_x, 15)
+                y = draw_justified_text(c, value, margin_x + 20, y, width - 2 * margin_x, 15)
             y -= 20
             if y < margin_y:
                 c.showPage()
