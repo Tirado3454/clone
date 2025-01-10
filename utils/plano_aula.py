@@ -44,6 +44,7 @@ def planejamento_aula_function():
         objetivo_mhd = st.text_area("Objetivo Específico para o MHD:", help="Defina o objetivo específico do Método Hipotético-Dedutivo para a aula.")
 
         # Etapas do MHD
+        st.markdown("### Etapas do MHD")
         observacao = st.text_area("1. Observação:", help="Descreva a observação inicial.")
         hipotese = st.text_area("2. Formulação de Hipótese:", help="Descreva a hipótese formulada.")
         deducao = st.text_area("3. Dedução:", help="Explique a dedução feita.")
