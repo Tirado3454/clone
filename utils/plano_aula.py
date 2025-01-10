@@ -103,6 +103,8 @@ def planejamento_aula_function():
             ("Conteúdo", conteudo),
             ("Recursos", recursos),
  ]
+        # Verificar se há dados nos espaços antes de adicionar o título
+if espacos:
         # Adicionar organização dos espaços ao PDF
         c.setFont("Helvetica-Bold", 14)  # Fonte maior e em negrito
         c.drawString(margin_x, y, "Organização dos Espaços")  # Título da seção
