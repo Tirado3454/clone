@@ -13,8 +13,8 @@ def planejamento_aula_function():
         st.subheader("Informações Gerais")
         professor = st.text_input("Nome do Professor:")
         disciplina = st.text_input("Disciplina:")
-        duracao = st.text_input("Duração da Aula:", "1 hora")
-        numero_alunos = st.text_input("Número de Alunos:", "20")
+        duracao = st.text_input("Duração da Aula:")
+        numero_alunos = st.text_input("Número de Alunos:")
         tema = st.text_input("Tema:")
 
         # Parte 2 - Competências, Conteúdo e Recursos
