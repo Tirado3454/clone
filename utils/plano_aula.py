@@ -151,107 +151,58 @@ def planejamento_aula_function():
             c.drawString(70, y, line)
             y -= 20
 
-        import io
-from fpdf import FPDF
-
-# Gerar o PDF com fpdf
-def gerar_pdf():
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_left_margin(15)
-    pdf.set_right_margin(15)
-    pdf.set_top_margin(15)
-
-    # Título do PDF
-    pdf.set_font("Arial", "B", 16)
-    pdf.cell(0, 10, "Planejamento de Aula - Método Hipotético-Dedutivo", 0, 1, "C")
-    pdf.ln(10)
-
-    # Conteúdo do PDF
-    pdf.set_font("Arial", "", 12)
-    pdf.multi_cell(0, 10, "Nome do Professor: Professor(a) X")
-    pdf.multi_cell(0, 10, "Disciplina: Xadrez e Estratégias Científicas")
-    pdf.multi_cell(0, 10, "Duração da Aula: 1 hora")
-    pdf.multi_cell(0, 10, "Número de Alunos: 20 alunos")
-    pdf.ln(5)
-
-    pdf.set_font("Arial", "B", 14)
-    pdf.cell(0, 10, "Objetivo da Aula", 0, 1)
-    pdf.set_font("Arial", "", 12)
-    pdf.multi_cell(
-        0, 10,
-        "Analisar e aplicar os conceitos do Método Hipotético-Dedutivo em situações reais de partidas de xadrez, "
-        "desenvolvendo o pensamento estratégico e crítico."
-    )
-    pdf.ln(5)
-
-    pdf.set_font("Arial", "B", 14)
-    pdf.cell(0, 10, "Etapas do Método Hipotético-Dedutivo", 0, 1)
-    pdf.set_font("Arial", "", 12)
-    pdf.multi_cell(
-        0, 10,
-        "1. Observação:\n"
-        "Após o lance 15... Cc4 na partida entre Gukesh e Ding Liren no Campeonato Mundial FIDE 2024, o bispo branco em e3 está sob ataque direto. "
-        "A estrutura de peões na ala da dama das brancas está comprometida."
-    )
-    pdf.multi_cell(
-        0, 10,
-        "2. Formulação de Hipótese:\n"
-        "A hipótese é que, recuando o bispo para f2, as brancas podem reorganizar suas peças defensivamente, mantendo o equilíbrio posicional e "
-        "preservando a estrutura de peões."
-    )
-    pdf.multi_cell(
-        0, 10,
-        "3. Dedução:\n"
-        "Deduzimos que, ao jogar 16. Bf2:\n"
-        "- O bispo será protegido de ameaças imediatas.\n"
-        "- A estrutura de peões será mantida.\n"
-        "- As pretas precisarão de movimentos adicionais para criar novas ameaças."
-    )
-    pdf.multi_cell(
-        0, 10,
-        "4. Teste Experimental:\n"
-        "O movimento 16. Bf2 foi jogado. As pretas pressionaram com 16... Td8, mas as brancas conseguiram tempo para reorganizar suas peças e "
-        "preparar contra-ataques."
-    )
-    pdf.multi_cell(
-        0, 10,
-        "5. Conclusão:\n"
-        "O movimento 16. Bf2 confirmou a hipótese inicial. A estrutura posicional foi preservada, e as brancas mantiveram o equilíbrio estratégico na partida."
-    )
-    pdf.ln(10)
-
-    pdf.set_font("Arial", "B", 14)
-    pdf.cell(0, 10, "Conteúdo Complementar", 0, 1)
-    pdf.set_font("Arial", "", 12)
-    pdf.multi_cell(
-        0, 10,
-        "Partida:\n"
-        "Campeonato Mundial FIDE 2024\n"
-        "Jogadores: Gukesh (Brancas) vs. Ding Liren (Pretas)\n"
-        "Resultado: 0-1\n"
-        "Abertura: Defesa Francesa – Variante Clássica, Variante Steinitz"
-    )
-    pdf.multi_cell(
-        0, 10,
-        "Ferramentas do Aplicativo:\n"
-        "- Editor de Tabuleiro: Para reproduzir posições críticas.\n"
-        "- Banco de Frases: Para justificar hipóteses e deduções.\n"
-        "- Exportação: Para registrar análises em PDFs e CSVs."
-    )
-
-    # Salvar o PDF no buffer
-    buffer = io.BytesIO()
-    pdf.output(buffer)
-    buffer.seek(0)
-    return buffer
-
-# Adicionar botão de download no Streamlit
-def planejamento_aula_function():
+       def planejamento_aula_function():
     st.title("Planejamento de Aula - Método Hipotético-Dedutivo")
 
-    # Botão para gerar e baixar o PDF
-    buffer = gerar_pdf()
+    # Gerar o PDF
+    buffer = BytesIO()
+    c = canvas.Canvas(buffer, pagesize=letter)
+    width, height = letter
+
+    # Título
+    c.setFont("Helvetica-Bold", 16)
+    c.drawCentredString(width / 2, height - 50, "Planejamento de Aula - Método Hipotético-Dedutivo")
+
+    # Conteúdo
+    c.setFont("Helvetica", 12)
+    c.drawString(50, height - 100, "Nome do Professor: Professor(a) X")
+    c.drawString(50, height - 120, "Disciplina: Xadrez e Estratégias Científicas")
+    c.drawString(50, height - 140, "Duração da Aula: 1 hora")
+    c.drawString(50, height - 160, "Número de Alunos: 20 alunos")
+
+    c.drawString(50, height - 200, "Objetivo da Aula:")
+    c.drawString(70, height - 220, "Analisar e aplicar os conceitos do Método Hipotético-Dedutivo em situações reais de partidas de xadrez,")
+    c.drawString(70, height - 240, "desenvolvendo o pensamento estratégico e crítico.")
+
+    # Etapas do Método Hipotético-Dedutivo
+    c.drawString(50, height - 280, "Etapas do Método Hipotético-Dedutivo:")
+    c.drawString(70, height - 300, "1. Observação:")
+    c.drawString(90, height - 320, "Após o lance 15... Cc4 na partida entre Gukesh e Ding Liren no Campeonato Mundial FIDE 2024,")
+    c.drawString(90, height - 340, "o bispo branco em e3 está sob ataque direto. A estrutura de peões na ala da dama das brancas está comprometida.")
+
+    c.drawString(70, height - 360, "2. Formulação de Hipótese:")
+    c.drawString(90, height - 380, "A hipótese é que, recuando o bispo para f2, as brancas podem reorganizar suas peças defensivamente,")
+    c.drawString(90, height - 400, "mantendo o equilíbrio posicional e preservando a estrutura de peões.")
+
+    c.drawString(70, height - 420, "3. Dedução:")
+    c.drawString(90, height - 440, "Deduzimos que, ao jogar 16. Bf2:")
+    c.drawString(110, height - 460, "- O bispo será protegido de ameaças imediatas.")
+    c.drawString(110, height - 480, "- A estrutura de peões será mantida.")
+    c.drawString(110, height - 500, "- As pretas precisarão de movimentos adicionais para criar novas ameaças.")
+
+    c.drawString(70, height - 520, "4. Teste Experimental:")
+    c.drawString(90, height - 540, "O movimento 16. Bf2 foi jogado. As pretas pressionaram com 16... Td8,")
+    c.drawString(90, height - 560, "mas as brancas conseguiram tempo para reorganizar suas peças e preparar contra-ataques.")
+
+    c.drawString(70, height - 580, "5. Conclusão:")
+    c.drawString(90, height - 600, "O movimento 16. Bf2 confirmou a hipótese inicial. A estrutura posicional foi preservada,")
+    c.drawString(90, height - 620, "e as brancas mantiveram o equilíbrio estratégico na partida.")
+
+    # Finalizar o PDF
+    c.save()
+    buffer.seek(0)
+
+    # Botão de download no Streamlit
     st.download_button(
         label="Baixar PDF",
         data=buffer,
