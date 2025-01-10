@@ -65,20 +65,29 @@ def planejamento_aula_function():
         margin_y = 50
         y = height - margin_y
 
-        # Função auxiliar para quebrar texto
+        # Função auxiliar para justificar texto e verificar quebra de página
         def draw_wrapped_text(canvas, text, x, y, max_width, line_height):
             words = text.split()
             line = ""
             for word in words:
-                if canvas.stringWidth(line + word, "Helvetica", 12) < max_width:
-                    line += word + " "
+                test_line = " ".join([line, word]).strip()
+                if canvas.stringWidth(test_line, "Helvetica", 12) < max_width:
+                    line = test_line
                 else:
-                    canvas.drawString(x, y, line.strip())
+                    canvas.drawString(x, y, line)
                     y -= line_height
-                    line = word + " "
+                    if y < margin_y:  # Verificar margem inferior
+                        canvas.showPage()
+                        y = height - margin_y
+                        canvas.setFont("Helvetica", 12)
+                    line = word
             if line:
-                canvas.drawString(x, y, line.strip())
+                canvas.drawString(x, y, line)
                 y -= line_height
+                if y < margin_y:  # Verificar margem inferior novamente
+                    canvas.showPage()
+                    y = height - margin_y
+                    canvas.setFont("Helvetica", 12)
             return y
 
         # Escrever conteúdo no PDF na mesma ordem do formulário
@@ -96,7 +105,7 @@ def planejamento_aula_function():
             # Organização dos Espaços
             ("Espaços", None),
             *[(f"Espaço {i} - Atividade", atividade) for i, (atividade, _, _, _) in enumerate(espacos, 1)],
-            *[(f"Espaço {i} - Duração", duracao) for i, (_, duracao, _, _) in enumerate(espacos, 1)],
+            *[(f"Espaço {i} - Duração", duracao_espaco) for i, (_, duracao_espaco, _, _) in enumerate(espacos, 1)],
             *[(f"Espaço {i} - Papel do Aluno", papel_aluno) for i, (_, _, papel_aluno, _) in enumerate(espacos, 1)],
             *[(f"Espaço {i} - Papel do Professor", papel_professor) for i, (_, _, _, papel_professor) in enumerate(espacos, 1)],
             ("Avaliação dos Objetivos", avaliacao_objetivos),
@@ -116,15 +125,16 @@ def planejamento_aula_function():
                 c.setFont("Helvetica-Bold", 12)
                 c.drawString(margin_x, y, label)
                 c.setFont("Helvetica", 12)
+                y -= 20
             else:  # Campo de texto
                 c.drawString(margin_x, y, f"{label}:")
                 y -= 20
                 y = draw_wrapped_text(c, value, margin_x + 20, y, width - 2 * margin_x, 15)
-            y -= 20
-            if y < margin_y:
-                c.showPage()
-                y = height - margin_y
-                c.setFont("Helvetica", 12)
+                y -= 20
+                if y < margin_y:  # Adicionar uma nova página se necessário
+                    c.showPage()
+                    y = height - margin_y
+                    c.setFont("Helvetica", 12)
 
         # Finalizar o PDF
         c.save()
