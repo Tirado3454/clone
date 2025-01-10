@@ -9,15 +9,51 @@ def planejamento_aula_function():
 
     # Formulário para os campos do planejamento
     with st.form("planejamento_form"):
+        # Parte 1 - Informações Gerais
+        st.subheader("Informações Gerais")
         professor = st.text_input("Nome do Professor:", help="Digite o nome do professor responsável pela aula.")
         disciplina = st.text_input("Disciplina:", help="Informe a disciplina para a qual a aula será planejada.")
         duracao = st.text_input("Duração da Aula:", "1 hora", help="Tempo total planejado para a aula.")
         numero_alunos = st.text_input("Número de Alunos:", "20", help="Quantidade de alunos esperada na aula.")
         tema = st.text_input("Tema:", help="Especifique o tema principal da aula.")
         
+        # Parte 2 - Competências, Conteúdo e Recursos
+        st.subheader("Competências, Conteúdo e Recursos")
+        competencia = st.text_area("Competência de Área:", help="Descreva a competência relacionada à área de ensino.")
+        habilidades = st.text_area("Habilidades:", help="Liste as habilidades que os alunos devem desenvolver.")
         conteudo = st.text_area("Conteúdo:", help="Detalhe o conteúdo a ser abordado na aula.")
+        recursos = st.text_area("Recursos:", help="Especifique os materiais e ferramentas necessários para a aula.")
+
+        # Parte 3 - Organização dos Espaços
+        st.subheader("Organização dos Espaços")
+        espacos = []
+        for i in range(1, 4):
+            st.markdown(f"**Espaço {i}**")
+            atividade = st.text_area(f"Espaço {i} - Atividade:", help="Descreva a atividade realizada neste espaço.")
+            duracao_espaco = st.text_input(f"Espaço {i} - Duração:", help="Informe a duração da atividade neste espaço.")
+            papel_aluno = st.text_area(f"Espaço {i} - Papel do Aluno:", help="Defina o papel dos alunos neste espaço.")
+            papel_professor = st.text_area(f"Espaço {i} - Papel do Professor:", help="Defina o papel do professor neste espaço.")
+            espacos.append((atividade, duracao_espaco, papel_aluno, papel_professor))
+
+        # Parte 4 - Avaliação
+        st.subheader("Avaliação")
+        avaliacao_objetivos = st.text_area("Avaliação dos Objetivos:", help="O que pode ser feito para observar se os objetivos foram cumpridos?")
+        avaliacao_aula = st.text_area("Avaliação da Aula:", help="Como foi sua avaliação da aula? (Aspectos positivos e negativos)")
+
+        # Parte 5 - Etapas do Método Hipotético-Dedutivo
+        st.subheader("Etapas do Método Hipotético-Dedutivo")
+        observacao = st.text_area("Observação:", help="Descreva a observação inicial.")
+        hipotese = st.text_area("Hipótese:", help="Descreva a hipótese formulada.")
+        deducao = st.text_area("Dedução:", help="Explique a dedução feita.")
+        teste = st.text_area("Teste Experimental:", help="Explique o teste realizado.")
+        analise = st.text_area("Análise e Consolidação:", help="Apresente a análise e os resultados consolidados.")
+
+        # Parte 6 - Reflexão e Registros
+        st.subheader("Reflexão e Registros")
+        registro = st.text_area("Registro dos Alunos:", help="Escreva o registro feito pelos alunos.")
+        questionamentos = st.text_area("Questionamentos Norteadores:", help="Liste perguntas que guiem os alunos.")
         reflexao = st.text_area("Reflexão Final:", help="Escreva a reflexão final sobre a aula.")
-        
+
         submitted = st.form_submit_button("Gerar PDF")
 
     if submitted:
@@ -36,21 +72,51 @@ def planejamento_aula_function():
         c.drawCentredString(width / 2, y, "Planejamento de Aula - Método Hipotético-Dedutivo")
         y -= 40
 
-        # Conteúdo
+        # Conteúdo do formulário no PDF
         c.setFont("Helvetica", 12)
-        for label, value in [
+        campos = [
             ("Nome do Professor", professor),
             ("Disciplina", disciplina),
             ("Duração da Aula", duracao),
             ("Número de Alunos", numero_alunos),
             ("Tema", tema),
+            ("Competência de Área", competencia),
+            ("Habilidades", habilidades),
             ("Conteúdo", conteudo),
+            ("Recursos", recursos),
+            ("Avaliação dos Objetivos", avaliacao_objetivos),
+            ("Avaliação da Aula", avaliacao_aula),
+            ("Observação", observacao),
+            ("Hipótese", hipotese),
+            ("Dedução", deducao),
+            ("Teste Experimental", teste),
+            ("Análise e Consolidação", analise),
+            ("Registro dos Alunos", registro),
+            ("Questionamentos Norteadores", questionamentos),
             ("Reflexão Final", reflexao),
-        ]:
-            text = f"{label}: {value}"
-            c.drawString(margin_x, y, text)
+        ]
+
+        for label, value in campos:
+            c.drawString(margin_x, y, f"{label}: {value}")
             y -= 20
-            if y < margin_y:  # Adiciona uma nova página se ultrapassar os limites
+            if y < margin_y:
+                c.showPage()
+                y = height - margin_y
+                c.setFont("Helvetica", 12)
+
+        # Espaços organizados
+        for i, (atividade, duracao_espaco, papel_aluno, papel_professor) in enumerate(espacos, start=1):
+            c.drawString(margin_x, y, f"Espaço {i}:")
+            y -= 20
+            c.drawString(margin_x + 20, y, f"Atividade: {atividade}")
+            y -= 20
+            c.drawString(margin_x + 20, y, f"Duração: {duracao_espaco}")
+            y -= 20
+            c.drawString(margin_x + 20, y, f"Papel do Aluno: {papel_aluno}")
+            y -= 20
+            c.drawString(margin_x + 20, y, f"Papel do Professor: {papel_professor}")
+            y -= 20
+            if y < margin_y:
                 c.showPage()
                 y = height - margin_y
                 c.setFont("Helvetica", 12)
@@ -59,21 +125,20 @@ def planejamento_aula_function():
         c.save()
         buffer.seek(0)
 
-        # Converter o PDF em base64 para exibição no navegador
-        pdf_data = buffer.getvalue()
-        pdf_base64 = base64.b64encode(pdf_data).decode('utf-8')
-
-        # Visualização no Streamlit
+        # Visualizar no navegador
         st.markdown("### Visualização do PDF")
+        pdf_data = buffer.getvalue()
+        pdf_base64 = base64.b64encode(pdf_data).decode("utf-8")
         st.markdown(
             f'<iframe src="data:application/pdf;base64,{pdf_base64}" width="700" height="500"></iframe>',
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
-        # Botão para download do PDF
+        # Botão para download
         st.download_button(
             label="Baixar PDF",
-            data=pdf_data,
+            data=buffer,
             file_name="planejamento_aula.pdf",
-            mime="application/pdf"
+            mime="application/pdf",
         )
+
