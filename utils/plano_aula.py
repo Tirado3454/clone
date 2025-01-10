@@ -103,13 +103,7 @@ def planejamento_aula_function():
             ("Conteúdo", conteudo),
             ("Recursos", recursos),
  ]
-        # Verificar se há dados nos espaços antes de adicionar o título
-if espacos:
-        # Adicionar organização dos espaços ao PDF
-        c.setFont("Helvetica-Bold", 14)  # Fonte maior e em negrito
-        c.drawString(margin_x, y, "Organização dos Espaços")  # Título da seção
-        y -= 30  # Ajustar o espaçamento vertical
-        c.setFont("Helvetica", 12)  # Retornar à fonte padrão
+        
         # Adicionar organização dos espaços ao PDF
         for i, (atividade, duracao_espaco, papel_aluno, papel_professor) in enumerate(espacos, start=1):
             sections.append((f"Espaço {i} - Atividade", atividade))
