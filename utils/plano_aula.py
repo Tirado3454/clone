@@ -48,110 +48,12 @@ def planejamento_aula_function():
     questionamentos = st.text_area("Questionamentos Norteadores", help="Quais perguntas podem orientar o raciocínio dos alunos?")
     reflexao_final = st.text_area("Reflexão Final", help="Descreva os aprendizados e reflexões finais da aula.")
 
- # Botão para salvar ou exportar o planejamento
-    if st.button("Gerar e Exportar PDF"):
-        buffer = BytesIO()
-        c = canvas.Canvas(buffer, pagesize=letter)
-        c.setFont("Helvetica", 12)
+ from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from io import BytesIO
+import streamlit as st
 
-        # Adicionar título
-        c.drawString(100, 750, "Planejamento de Aula - Método Hipotético-Dedutivo")
-
-        # Adicionar informações básicas
-        y = 700
-        c.drawString(50, y, f"Nome do Professor: {professor}")
-        y -= 20
-        c.drawString(50, y, f"Disciplina: {disciplina}")
-        y -= 20
-        c.drawString(50, y, f"Duração da Aula: {duracao}")
-        y -= 20
-        c.drawString(50, y, f"Número de Alunos: {numero_alunos}")
-        y -= 20
-        c.drawString(50, y, f"Tema: {tema}")
-        y -= 40
-
-        # Competências e habilidades
-        c.drawString(50, y, "Competências de Área:")
-        y -= 20
-        for line in competencias.split("\n"):
-            c.drawString(70, y, line)
-            y -= 20
-        c.drawString(50, y, "Habilidades:")
-        y -= 20
-        for line in habilidades.split("\n"):
-            c.drawString(70, y, line)
-            y -= 20
-        y -= 20
-
-        # Conteúdo e recursos
-        c.drawString(50, y, "Conteúdo:")
-        y -= 20
-        for line in conteudo.split("\n"):
-            c.drawString(70, y, line)
-            y -= 20
-        c.drawString(50, y, "Recursos:")
-        y -= 20
-        for line in recursos.split("\n"):
-            c.drawString(70, y, line)
-            y -= 20
-        y -= 40
-
-        # Página 2 - MHD e Reflexões
-        if y < 100:  # Adicionar nova página se o espaço for insuficiente
-            c.showPage()
-            y = 750
-
-        c.drawString(50, y, "Objetivo Específico para o MHD:")
-        y -= 20
-        c.drawString(70, y, objetivo_mhd)
-        y -= 40
-
-        c.drawString(50, y, "Etapas do Método Hipotético-Dedutivo:")
-        y -= 20
-        c.drawString(70, y, "Observação:")
-        y -= 20
-        for line in observacao.split("\n"):
-            c.drawString(90, y, line)
-            y -= 20
-        c.drawString(70, y, "Hipótese:")
-        y -= 20
-        for line in hipotese.split("\n"):
-            c.drawString(90, y, line)
-            y -= 20
-        c.drawString(70, y, "Dedução:")
-        y -= 20
-        for line in deducao.split("\n"):
-            c.drawString(90, y, line)
-            y -= 20
-        c.drawString(70, y, "Teste Experimental:")
-        y -= 20
-        for line in teste_experimental.split("\n"):
-            c.drawString(90, y, line)
-            y -= 20
-        c.drawString(70, y, "Análise e Consolidação:")
-        y -= 20
-        for line in analise_consolidacao.split("\n"):
-            c.drawString(90, y, line)
-            y -= 20
-        y -= 40
-
-        c.drawString(50, y, "Registro dos Alunos:")
-        y -= 20
-        for line in registro_alunos.split("\n"):
-            c.drawString(70, y, line)
-            y -= 20
-        c.drawString(50, y, "Questionamentos Norteadores:")
-        y -= 20
-        for line in questionamentos.split("\n"):
-            c.drawString(70, y, line)
-            y -= 20
-        c.drawString(50, y, "Reflexão Final:")
-        y -= 20
-        for line in reflexao_final.split("\n"):
-            c.drawString(70, y, line)
-            y -= 20
-
-       def planejamento_aula_function():
+def planejamento_aula_function():
     st.title("Planejamento de Aula - Método Hipotético-Dedutivo")
 
     # Gerar o PDF
