@@ -8,17 +8,52 @@ def planejamento_aula_function():
 
     # Formulário para os campos do planejamento
     with st.form("planejamento_form"):
-        professor = st.text_input("Nome do Professor:")
-        disciplina = st.text_input("Disciplina:")
-        duracao = st.text_input("Duração da Aula:", "1 hora")
-        numero_alunos = st.text_input("Número de Alunos:", "20")
-        objetivo = st.text_area("Objetivo da Aula:", "Descreva o objetivo da aula...")
+        # Parte 1
+        professor = st.text_input("Nome do Professor:", help="Digite o nome do professor responsável pela aula.")
+        disciplina = st.text_input("Disciplina:", help="Informe a disciplina para a qual a aula será planejada.")
+        duracao = st.text_input("Duração da Aula:", "1 hora", help="Tempo total planejado para a aula.")
+        numero_alunos = st.text_input("Número de Alunos:", "20", help="Quantidade de alunos esperada na aula.")
+        tema = st.text_input("Tema:", help="Especifique o tema principal da aula.")
         
-        observacao = st.text_area("1. Observação:", "Descreva a observação inicial...")
-        hipotese = st.text_area("2. Formulação de Hipótese:", "Descreva a hipótese...")
-        deducao = st.text_area("3. Dedução:", "Explique a dedução...")
-        teste = st.text_area("4. Teste Experimental:", "Explique o teste realizado...")
-        conclusao = st.text_area("5. Conclusão:", "Descreva as conclusões...")
+        competencia = st.text_area("Competência de Área:", help="Descreva a competência relacionada à área de ensino.")
+        habilidades = st.text_area("Habilidades:", help="Liste as habilidades que os alunos devem desenvolver.")
+        conteudo = st.text_area("Conteúdo:", help="Detalhe o conteúdo a ser abordado na aula.")
+        recursos = st.text_area("Recursos:", help="Especifique os materiais e ferramentas necessários para a aula.")
+
+        # Organização dos espaços
+        st.markdown("### Organização dos Espaços")
+        espaco1_atividade = st.text_area("Espaço 1 - Atividade:", help="Descreva a atividade que será realizada neste espaço.")
+        espaco1_duracao = st.text_input("Espaço 1 - Duração:", help="Informe a duração da atividade neste espaço.")
+        espaco1_papel_aluno = st.text_area("Espaço 1 - Papel do Aluno:", help="Defina o papel dos alunos neste espaço.")
+        espaco1_papel_professor = st.text_area("Espaço 1 - Papel do Professor:", help="Defina o papel do professor neste espaço.")
+
+        espaco2_atividade = st.text_area("Espaço 2 - Atividade:", help="Descreva a atividade que será realizada neste espaço.")
+        espaco2_duracao = st.text_input("Espaço 2 - Duração:", help="Informe a duração da atividade neste espaço.")
+        espaco2_papel_aluno = st.text_area("Espaço 2 - Papel do Aluno:", help="Defina o papel dos alunos neste espaço.")
+        espaco2_papel_professor = st.text_area("Espaço 2 - Papel do Professor:", help="Defina o papel do professor neste espaço.")
+
+        espaco3_atividade = st.text_area("Espaço 3 - Atividade:", help="Descreva a atividade que será realizada neste espaço.")
+        espaco3_duracao = st.text_input("Espaço 3 - Duração:", help="Informe a duração da atividade neste espaço.")
+        espaco3_papel_aluno = st.text_area("Espaço 3 - Papel do Aluno:", help="Defina o papel dos alunos neste espaço.")
+        espaco3_papel_professor = st.text_area("Espaço 3 - Papel do Professor:", help="Defina o papel do professor neste espaço.")
+
+        # Parte 2
+        avaliacao_objetivos = st.text_area("Avaliação dos Objetivos:", help="O que pode ser feito para observar se os objetivos foram cumpridos?")
+        avaliacao_aula = st.text_area("Avaliação da Aula:", help="Como foi sua avaliação da aula? (Aspectos positivos e negativos)")
+
+        objetivo_mhd = st.text_area("Objetivo Específico para o MHD:", help="Defina o objetivo específico do Método Hipotético-Dedutivo para a aula.")
+
+        # Etapas do MHD
+        observacao = st.text_area("1. Observação:", help="Descreva a observação inicial.")
+        hipotese = st.text_area("2. Formulação de Hipótese:", help="Descreva a hipótese formulada.")
+        deducao = st.text_area("3. Dedução:", help="Explique a dedução feita.")
+        teste = st.text_area("4. Teste Experimental:", help="Explique o teste realizado.")
+        analise = st.text_area("5. Análise e Consolidação:", help="Apresente a análise e os resultados consolidados.")
+
+        # Reflexão
+        registro = st.text_area("Registro dos Alunos:", help="Escreva o registro feito pelos alunos.")
+        questionamentos = st.text_area("Questionamentos Norteadores:", help="Liste perguntas que guiem os alunos.")
+        reflexao = st.text_area("Reflexão Final:", help="Escreva a reflexão final sobre a aula.")
 
         # Botão para submeter os dados
         submitted = st.form_submit_button("Gerar PDF")
@@ -33,32 +68,36 @@ def planejamento_aula_function():
         c.setFont("Helvetica-Bold", 16)
         c.drawCentredString(width / 2, height - 50, "Planejamento de Aula - Método Hipotético-Dedutivo")
 
-        # Conteúdo do PDF
+        # Preencher os campos no PDF
+        y = height - 100  # Altura inicial
         c.setFont("Helvetica", 12)
-        c.drawString(50, height - 100, f"Nome do Professor: {professor}")
-        c.drawString(50, height - 120, f"Disciplina: {disciplina}")
-        c.drawString(50, height - 140, f"Duração da Aula: {duracao}")
-        c.drawString(50, height - 160, f"Número de Alunos: {numero_alunos}")
-
-        c.drawString(50, height - 200, "Objetivo da Aula:")
-        c.drawString(70, height - 220, objetivo)
-
-        # Etapas do Método Hipotético-Dedutivo
-        c.drawString(50, height - 260, "Etapas do Método Hipotético-Dedutivo:")
-        c.drawString(70, height - 280, "1. Observação:")
-        c.drawString(90, height - 300, observacao)
-
-        c.drawString(70, height - 320, "2. Formulação de Hipótese:")
-        c.drawString(90, height - 340, hipotese)
-
-        c.drawString(70, height - 360, "3. Dedução:")
-        c.drawString(90, height - 380, deducao)
-
-        c.drawString(70, height - 400, "4. Teste Experimental:")
-        c.drawString(90, height - 420, teste)
-
-        c.drawString(70, height - 440, "5. Conclusão:")
-        c.drawString(90, height - 460, conclusao)
+        for label, value in [
+            ("Nome do Professor", professor),
+            ("Disciplina", disciplina),
+            ("Duração da Aula", duracao),
+            ("Número de Alunos", numero_alunos),
+            ("Tema", tema),
+            ("Competência de Área", competencia),
+            ("Habilidades", habilidades),
+            ("Conteúdo", conteudo),
+            ("Recursos", recursos),
+            # Organização dos Espaços
+            ("Espaço 1 - Atividade", espaco1_atividade),
+            ("Espaço 1 - Duração", espaco1_duracao),
+            ("Espaço 1 - Papel do Aluno", espaco1_papel_aluno),
+            ("Espaço 1 - Papel do Professor", espaco1_papel_professor),
+            # Avaliação
+            ("Avaliação dos Objetivos", avaliacao_objetivos),
+            ("Avaliação da Aula", avaliacao_aula),
+            # Reflexão Final
+            ("Reflexão Final", reflexao),
+        ]:
+            c.drawString(50, y, f"{label}: {value}")
+            y -= 20
+            if y < 50:  # Nova página
+                c.showPage()
+                c.setFont("Helvetica", 12)
+                y = height - 50
 
         # Finalizar o PDF
         c.save()
