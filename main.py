@@ -148,6 +148,7 @@ elif menu_type == "🗂 Planejamento":
         pdfs = {
             "Template Planejamento Aula": "https://github.com/Tirado3454/clone/blob/main/pdfs/plano%20de%20aula_Xadrez.pdf",
             "Planejamento Aula exemplo": "https://github.com/Tirado3454/clone/blob/main/pdfs/Formul%C3%A1rio_exemplo.pdf",
+            "Planejamento Aula exemplo": "https://github.com/Tirado3454/clone/blob/main/pdfs/Formul%C3%A1rio_exemplo.pdf",
         }
         for nome, link in pdfs.items():
             st.markdown(f"- [{nome}]({link})")
