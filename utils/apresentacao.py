@@ -7,6 +7,14 @@ def apresentacao_function():
     # Espaço em branco acima para centralizar visualmente
     st.markdown("<br><br>", unsafe_allow_html=True)
 
+    # Título principal
+    st.markdown(
+        """
+        <h1 style="text-align: center; color: #333;">Xadrez e Ciência: Aplicações do Método Hipotético-Dedutivo no Ensino Estratégico</h1>
+        """,
+        unsafe_allow_html=True,
+    )
+
     # Colunas centralizadas
     empty_col, col1, col2, col3, empty_col2 = st.columns([1, 1, 1, 1, 1])  # Espaçamento igual nas laterais
     with col1:
