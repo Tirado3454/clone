@@ -149,7 +149,7 @@ elif menu_type == "🗂 Planejamento":
             "Template Planejamento Aula": "https://github.com/Tirado3454/clone/blob/main/pdfs/plano%20de%20aula_Xadrez.pdf",
             "Planejamento Aula exemplo": "https://github.com/Tirado3454/clone/blob/main/pdfs/Formul%C3%A1rio_exemplo.pdf",
             "O cientista e o enxadrista": "https://github.com/Tirado3454/clone/blob/main/pdfs/qualidade_cientista.pdf",
-            "O cientista e o enxadrista": "https://github.com/Tirado3454/clone/blob/main/pdfs/https://github.com/Tirado3454/clone/blob/main/pdfs/Checklist.pdf",
+            "Checklist do MHD para o xadrez": "https://github.com/Tirado3454/clone/blob/main/pdfs/https://github.com/Tirado3454/clone/blob/main/pdfs/Checklist.pdf",
         }
         for nome, link in pdfs.items():
             st.markdown(f"- [{nome}]({link})")
