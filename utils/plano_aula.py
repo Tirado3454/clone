@@ -9,38 +9,33 @@ def planejamento_aula_function():
 
     # Formulário para os campos do planejamento
     with st.form("planejamento_form"):
-        # Parte 1 - Informações Gerais
         st.subheader("Informações Gerais")
         professor = st.text_input("Nome do Professor:", help="Digite o nome completo do professor responsável pela aula.")
-        disciplina = st.text_input("Disciplina:", help="Informe a disciplina a qual o plano de aula está relacionado.")
+        disciplina = st.text_input("Disciplina:", help="Informe a disciplina relacionada ao plano de aula.")
         duracao = st.text_input("Duração da Aula:", help="Informe o tempo total planejado para a aula.")
         numero_alunos = st.text_input("Número de Alunos:", help="Especifique o número estimado de alunos para esta aula.")
         tema = st.text_input("Tema:", help="Defina o tema principal que será abordado na aula.")
 
-        # Parte 2 - Competências, Conteúdo e Recursos
         st.subheader("Competências, Conteúdo e Recursos")
-        competencia = st.text_area("Competência de Área:", help="Descreva as competências que serão trabalhadas na aula, alinhadas à BNCC ou outro documento oficial.")
-        habilidades = st.text_area("Habilidades:", help="Liste as habilidades que os alunos deverão desenvolver com esta aula.")
+        competencia = st.text_area("Competência de Área:", help="Descreva as competências que serão trabalhadas, alinhadas à BNCC ou outro documento oficial.")
+        habilidades = st.text_area("Habilidades:", help="Liste as habilidades que os alunos deverão desenvolver.")
         conteudo = st.text_area("Conteúdo:", help="Detalhe os conteúdos que serão abordados.")
-        recursos = st.text_area("Recursos:", help="Especifique os materiais, ferramentas ou equipamentos necessários para a aula.")
+        recursos = st.text_area("Recursos:", help="Especifique os materiais, ferramentas ou equipamentos necessários.")
 
-        # Parte 3 - Organização dos Espaços
         st.subheader("Organização dos Espaços")
         espacos = []
         for i in range(1, 4):
             st.markdown(f"**Espaço {i}**")
-            atividade = st.text_area(f"Espaço {i} - Atividade:", help="Descreva a atividade que será realizada neste espaço.")
+            atividade = st.text_area(f"Espaço {i} - Atividade:", help="Descreva a atividade realizada neste espaço.")
             duracao_espaco = st.text_input(f"Espaço {i} - Duração:", help="Informe a duração estimada para esta atividade.")
-            papel_aluno = st.text_area(f"Espaço {i} - Papel do Aluno:", help="Explique o papel e as responsabilidades dos alunos nesta atividade.")
-            papel_professor = st.text_area(f"Espaço {i} - Papel do Professor:", help="Explique o papel e as responsabilidades do professor nesta atividade.")
+            papel_aluno = st.text_area(f"Espaço {i} - Papel do Aluno:", help="Explique o papel dos alunos nesta atividade.")
+            papel_professor = st.text_area(f"Espaço {i} - Papel do Professor:", help="Explique o papel do professor nesta atividade.")
             espacos.append((atividade, duracao_espaco, papel_aluno, papel_professor))
 
-        # Parte 4 - Avaliação
         st.subheader("Avaliação")
         avaliacao_objetivos = st.text_area("Avaliação dos Objetivos:", help="Descreva como os objetivos da aula serão avaliados.")
-        avaliacao_aula = st.text_area("Avaliação da Aula:", help="Faça uma avaliação geral da aula, destacando os pontos positivos e aspectos a melhorar.")
+        avaliacao_aula = st.text_area("Avaliação da Aula:", help="Faça uma avaliação geral da aula, destacando pontos positivos e aspectos a melhorar.")
 
-        # Parte 5 - Etapas do Método Hipotético-Dedutivo
         st.subheader("Etapas do Método Hipotético-Dedutivo")
         observacao = st.text_area("Observação:", help="Descreva as observações iniciais feitas antes de começar a aula.")
         hipotese = st.text_area("Hipótese:", help="Apresente as hipóteses levantadas a partir da observação.")
@@ -48,7 +43,6 @@ def planejamento_aula_function():
         teste = st.text_area("Teste Experimental:", help="Detalhe o teste experimental realizado para validar as hipóteses.")
         analise = st.text_area("Análise e Consolidação:", help="Apresente a análise final e os resultados consolidados.")
 
-        # Parte 6 - Reflexão e Registros
         st.subheader("Reflexão e Registros")
         registro = st.text_area("Registro dos Alunos:", help="Registre as reflexões ou observações feitas pelos alunos.")
         questionamentos = st.text_area("Questionamentos Norteadores:", help="Liste perguntas que guiarão a aula e a discussão.")
@@ -62,10 +56,10 @@ def planejamento_aula_function():
         c = canvas.Canvas(buffer, pagesize=letter)
         width, height = letter
         margin_x = 50
-        margin_y = 50
-        y = height - margin_y
+        margin_y = 70  # Ajuste para margens superiores e inferiores
+        y = height - margin_y  # Início do conteúdo no topo
 
-        # Função auxiliar para justificar texto e verificar quebra de página
+        # Função auxiliar para desenhar texto justificado e verificar quebra de página
         def draw_wrapped_text(canvas, text, x, y, max_width, line_height):
             words = text.split()
             line = ""
@@ -76,7 +70,7 @@ def planejamento_aula_function():
                 else:
                     canvas.drawString(x, y, line)
                     y -= line_height
-                    if y < margin_y:  # Verificar margem inferior
+                    if y < margin_y:  # Quebra de página
                         canvas.showPage()
                         y = height - margin_y
                         canvas.setFont("Helvetica", 12)
@@ -84,56 +78,75 @@ def planejamento_aula_function():
             if line:
                 canvas.drawString(x, y, line)
                 y -= line_height
-                if y < margin_y:  # Verificar margem inferior novamente
+                if y < margin_y:  # Verificar margem inferior
                     canvas.showPage()
                     y = height - margin_y
                     canvas.setFont("Helvetica", 12)
             return y
 
-        # Organização dos campos no PDF
-        c.setFont("Helvetica", 12)
-        sections = [
+        # Função auxiliar para adicionar títulos
+        def add_title(canvas, text, x, y):
+            canvas.setFont("Helvetica-Bold", 14)
+            canvas.drawString(x, y, text)
+            return y - 30
+
+        # Adicionar seções ao PDF
+        def add_section(canvas, title, fields, y):
+            y = add_title(canvas, title, margin_x, y)
+            for label, value in fields:
+                canvas.setFont("Helvetica", 12)
+                canvas.drawString(margin_x, y, f"{label}:")
+                y -= 20
+                y = draw_wrapped_text(canvas, value, margin_x + 20, y, width - 2 * margin_x, 15)
+                y -= 20
+                if y < margin_y:
+                    canvas.showPage()
+                    y = height - margin_y
+            return y
+
+        # Adicionar todas as seções
+        y = add_section(c, "Informações Gerais", [
             ("Nome do Professor", professor),
             ("Disciplina", disciplina),
             ("Duração da Aula", duracao),
             ("Número de Alunos", numero_alunos),
             ("Tema", tema),
+        ], y)
+
+        y = add_section(c, "Competências, Conteúdo e Recursos", [
             ("Competência de Área", competencia),
             ("Habilidades", habilidades),
             ("Conteúdo", conteudo),
             ("Recursos", recursos),
- ]
-        
-        # Adicionar organização dos espaços ao PDF
-        for i, (atividade, duracao_espaco, papel_aluno, papel_professor) in enumerate(espacos, start=1):
-            sections.append((f"Espaço {i} - Atividade", atividade))
-            sections.append((f"Espaço {i} - Duração", duracao_espaco))
-            sections.append((f"Espaço {i} - Papel do Aluno", papel_aluno))
-            sections.append((f"Espaço {i} - Papel do Professor", papel_professor))
+        ], y)
 
-        # Continuar com os campos restantes
-        sections += [
+        y = add_title(c, "Organização dos Espaços", margin_x, y)
+        for i, (atividade, duracao_espaco, papel_aluno, papel_professor) in enumerate(espacos, start=1):
+            y = add_section(c, f"Espaço {i}", [
+                ("Atividade", atividade),
+                ("Duração", duracao_espaco),
+                ("Papel do Aluno", papel_aluno),
+                ("Papel do Professor", papel_professor),
+            ], y)
+
+        y = add_section(c, "Avaliação", [
             ("Avaliação dos Objetivos", avaliacao_objetivos),
             ("Avaliação da Aula", avaliacao_aula),
+        ], y)
+
+        y = add_section(c, "Etapas do Método Hipotético-Dedutivo", [
             ("Observação", observacao),
             ("Hipótese", hipotese),
             ("Dedução", deducao),
             ("Teste Experimental", teste),
             ("Análise e Consolidação", analise),
+        ], y)
+
+        y = add_section(c, "Reflexão e Registros", [
             ("Registro dos Alunos", registro),
             ("Questionamentos Norteadores", questionamentos),
             ("Reflexão Final", reflexao),
-        ]
-
-        for label, value in sections:
-            c.drawString(margin_x, y, f"{label}:")
-            y -= 20
-            y = draw_wrapped_text(c, value, margin_x + 20, y, width - 2 * margin_x, 15)
-            y -= 20
-            if y < margin_y:
-                c.showPage()
-                y = height - margin_y
-                c.setFont("Helvetica", 12)
+        ], y)
 
         # Finalizar PDF
         c.save()
@@ -152,3 +165,6 @@ def planejamento_aula_function():
             file_name="planejamento_aula.pdf",
             mime="application/pdf",
         )
+
+if __name__ == "__main__":
+    planejamento_aula_function()
