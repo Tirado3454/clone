@@ -19,16 +19,17 @@ from utils.referencia import referencia_page_function
 from utils.artigos import artigos_page_function  # Import da página de artigos
 from utils.plano_aula import planejamento_aula_function
 
-# Configuração inicial da página
-st.set_page_config(page_title="Ensino de Ciência e Xadrez", layout="wide")
+# Aplicar estilo global
+aplicar_estilo()
 
-# Inicializar estados globais, se necessário
-if "mhd_data" not in st.session_state:
-    st.session_state["mhd_data"] = {}
-if "board_data" not in st.session_state:
-    st.session_state["board_data"] = ""
-if "phrases_selected" not in st.session_state:
-    st.session_state["phrases_selected"] = []
+# Título principal
+st.markdown(
+    """
+    <h1 style="text-align: center; color: #4CAF50;">Ensino de Ciência e Xadrez</h1>
+    <p style="text-align: center; color: #555;">Explore conteúdos, ferramentas interativas e recursos didáticos.</p>
+    """,
+    unsafe_allow_html=True
+)
 
 # Divisão do menu
 menu_type = st.sidebar.radio("📂 Selecione o tipo de conteúdo:", ["📖 Textos", "⚙️ Funcionalidades", "🗂 Planejamento"])
