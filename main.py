@@ -150,6 +150,9 @@ elif menu_type == "🗂 Planejamento":
             "Planejamento Aula exemplo": "https://github.com/Tirado3454/clone/blob/main/pdfs/Formul%C3%A1rio_exemplo.pdf",
             "O cientista e o enxadrista": "https://github.com/Tirado3454/clone/blob/main/pdfs/qualidade_cientista.pdf",
             "Checklist do MHD para o xadrez": "https://github.com/Tirado3454/clone/blob/main/pdfs/Checklist.pdf",
+            "Método Científico": "https://github.com/Tirado3454/clone/blob/main/pdfs/metodo_cientifico.pdf",
+            "Método Dedutivo": "https://github.com/Tirado3454/clone/blob/main/pdfs/metodo_dedutivo.pdf",
+            "Método Indutivo": "https://github.com/Tirado3454/clone/blob/main/pdfs/metodo_indutivo.pdf",
         }
         for nome, link in pdfs.items():
             st.markdown(f"- [{nome}]({link})")
