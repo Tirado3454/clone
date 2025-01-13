@@ -153,6 +153,8 @@ elif menu_type == "🗂 Planejamento":
             "Método Científico": "https://github.com/Tirado3454/clone/blob/main/pdfs/metodo_cientifico.pdf",
             "Método Dedutivo": "https://github.com/Tirado3454/clone/blob/main/pdfs/metodo_dedutivo.pdf",
             "Método Indutivo": "https://github.com/Tirado3454/clone/blob/main/pdfs/metodo_indutivo.pdf",
+            "Método analógico": "https://github.com/Tirado3454/clone/blob/main/pdfs/metodo_analogico.pdf",
+            "Método Dialético": "https://github.com/Tirado3454/clone/blob/main/pdfs/metodo_dialetico.pdf",
         }
         for nome, link in pdfs.items():
             st.markdown(f"- [{nome}]({link})")
